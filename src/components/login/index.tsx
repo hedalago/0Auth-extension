@@ -1,7 +1,8 @@
 import React from 'react';
-import { Typography, TextField, Button, makeStyles } from '@material-ui/core';
+import { Typography, TextField, makeStyles } from '@material-ui/core';
 import LockOpenIcon from '@material-ui/icons/LockOpen';
 
+import { BaseButton } from '../common';
 import Layout from '../layout';
 
 type LoginPageProps = {
@@ -10,7 +11,7 @@ type LoginPageProps = {
 
 const useStyles = makeStyles(() => ({
     topSpacing: {
-        height: 200,
+        height: 160,
     },
     head: {
         fontWeight: 'bold',
@@ -34,15 +35,6 @@ const useStyles = makeStyles(() => ({
             borderBottomColor: '#1976d2',
         },
     },
-    button: {
-        display: 'flex',
-        justifyContent: 'space-around',
-        backgroundColor: '#1976d2',
-        color:'white',
-        '&:hover': {
-            backgroundColor: '#0076f3',
-        },
-    }
 }));
 
 // TODO: specify properties and their types
@@ -57,14 +49,9 @@ export default function LoginPage() {
             </Typography>
             <form className={classes.form}>
                 <TextField className={classes.input} type="password" label="Password" />
-                <Button 
-                    className={classes.button} 
-                    variant="contained" 
-                    size="large"
-                    endIcon={<LockOpenIcon />}
-                >
+                <BaseButton icon={<LockOpenIcon />}>
                     Start 0auth
-                </Button> 
+                </BaseButton> 
             </form>
         </Layout>
     );
