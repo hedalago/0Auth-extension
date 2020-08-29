@@ -1,7 +1,7 @@
 import React from 'react';
 import { TextField, Box, makeStyles } from '@material-ui/core';
 
-import { BaseButton } from '../common';
+import { BaseButton, WebsiteInfo } from '../common';
 import Layout from '../layout';
 
 type DynamicFormInput = {
@@ -45,6 +45,7 @@ export default function RegisterPage({ title, favicon, dynamicFormInputs }: Regi
 
     return (
         <Layout>
+            <WebsiteInfo title={title} favicon={favicon} />
             <form className={classes.form}>
                 {
                     dynamicFormInputs.map(props => {
