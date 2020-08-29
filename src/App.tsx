@@ -5,7 +5,7 @@ import { LoginPage, RegisterPage } from './components';
 export default function App() {
   const dummyData = {
     title: 'Naver',
-    favicon: '',
+    favicon: 'https://s.pstatic.net/static/www/mobile/edit/2016/0705/mobile_212852414260.png',
     inputs: [
       {
         type: 'text',
