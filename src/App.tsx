@@ -1,12 +1,12 @@
 import React from 'react';
 
-import { LoginPage, RegisterPage, AuthPage } from './components';
+import { LoginPage, RegisterPage, AuthPage, MainPage } from './components';
 
 export default function App() {
   const dummyData = {
     title: 'Naver',
     favicon: 'https://s.pstatic.net/static/www/mobile/edit/2016/0705/mobile_212852414260.png',
-    inputs: [
+    formInputs: [
       {
         type: 'text',
         name: 'user-id',
@@ -49,13 +49,52 @@ export default function App() {
         label: 'Birth',
         required: true,
       }
-    ]
-  }
+    ],
+    currentInfos: [
+      {
+        label: 'Id',
+        data: 'abcd',
+      },
+      {
+        label: 'E-mail',
+        data: 'abcd@gmail.com'
+      },
+      {
+        label: 'Password',
+        data: '12345',
+      },
+      {
+        label: 'Birth',
+        data: '2000-01-01',
+      }
+    ],
+    signature: '048da7b63430eb4db203177baf2e8699a25116561624e67a31c2bf288d54216ce3f6f9c7b81fdbb5732342475a6ee5ccab883277ddbb38fdb79ab5424d401b844a',
+  };
+
   return (
     <div className="App">
       <LoginPage />
-     <RegisterPage favicon={dummyData.favicon} title={dummyData.title} dynamicFormInputs={dummyData.inputs} />
-     <AuthPage favicon={dummyData.favicon} title={dummyData.title} reqInfos={dummyData.reqInfos} />
+      <RegisterPage 
+        favicon={dummyData.favicon} 
+        title={dummyData.title} 
+        dynamicFormInputs={dummyData.formInputs} 
+      />
+      <AuthPage 
+        favicon={dummyData.favicon} 
+        title={dummyData.title} 
+        reqInfos={dummyData.reqInfos} 
+      />
+      <RegisterPage 
+        favicon={dummyData.favicon} 
+        title={dummyData.title} 
+        dynamicFormInputs={dummyData.formInputs}
+      />
+      <MainPage 
+        favicon={dummyData.favicon} 
+        title={dummyData.title} 
+        currentInfos={dummyData.currentInfos} 
+        signature={dummyData.signature} 
+      />
     </div>
   );
 };

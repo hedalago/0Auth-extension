@@ -15,6 +15,7 @@ const useStyles = makeStyles(() => ({
         height: "600px",
         border: "1px solid #1976d2",
         borderRadius: "8px",
+        padding: 0,
     },
 }));
 
