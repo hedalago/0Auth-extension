@@ -10,6 +10,8 @@ const useStyles = makeStyles(() => ({
         '&:hover': {
             backgroundColor: '#0076f3',
         },
+        fontFamily: ['"Noto Sans"', 'sans-serif'].join(','),
+        fontWeight: 'bold',
     }
 }))
 

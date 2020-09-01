@@ -17,6 +17,7 @@ const useStyles = makeStyles(() => ({
     },
     title: {
         fontSize: 24,
+        fontFamily: ['"Noto Sans"', 'sans-serif'].join(','),
         fontWeight: 'bold',
         marginLeft: 18,
     }

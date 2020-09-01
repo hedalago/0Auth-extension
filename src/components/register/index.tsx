@@ -7,9 +7,9 @@ import Layout from '../layout';
 type DynamicFormInput = {
     type: string,
     label: string,
+    required: boolean,
     name?: string,
     placeholder?: string,
-    required?: boolean,
 }
 
 type RegisterPageProps = {
