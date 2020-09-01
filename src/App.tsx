@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { LoginPage, RegisterPage } from './components';
+import { LoginPage, RegisterPage, AuthPage } from './components';
 
 export default function App() {
   const dummyData = {
@@ -11,21 +11,43 @@ export default function App() {
         type: 'text',
         name: 'user-id',
         label: 'Id',
+        required: true,
       },
       {
         type: 'email',
         name: 'user-email',
-        label: 'E-mail'
+        label: 'E-mail',
+        required: true,
       },
       {
         type: 'password',
         name: 'user-password',
-        label: 'Password'
+        label: 'Password',
+        required: true,
       },
       {
         type: 'date',
         name: 'user-birth',
-        label: 'Birth'
+        label: 'Birth',
+        required: true,
+      }
+    ],
+    reqInfos: [
+      {
+        label: 'Id',
+        required: true,
+      },
+      {
+        label: 'E-mail',
+        required: true,
+      },
+      {
+        label: 'Password',
+        required: true,
+      },
+      {
+        label: 'Birth',
+        required: true,
       }
     ]
   }
@@ -33,6 +55,7 @@ export default function App() {
     <div className="App">
       <LoginPage />
      <RegisterPage favicon={dummyData.favicon} title={dummyData.title} dynamicFormInputs={dummyData.inputs} />
+     <AuthPage favicon={dummyData.favicon} title={dummyData.title} reqInfos={dummyData.reqInfos} />
     </div>
   );
 };
