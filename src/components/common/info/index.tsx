@@ -13,17 +13,17 @@ const useStyles = makeStyles(() => ({
         alignItems: 'center',
     },
     icon: {
-        marginLeft: 42,
+        marginLeft: '5rem',
     },
     title: {
         fontSize: 24,
         fontFamily: ['"Noto Sans"', 'sans-serif'].join(','),
         fontWeight: 'bold',
-        marginLeft: 18,
+        marginLeft: 12,
     }
 }));
 
-export default function WebsiteInfo ({ title, favicon }: WebsiteInfoProps) {
+export default function WebsiteInfo({ title, favicon }: WebsiteInfoProps) {
     const classes = useStyles();
 
     return (
