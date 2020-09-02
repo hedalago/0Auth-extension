@@ -63,7 +63,7 @@ export default function AuthPage ({ title, favicon, reqInfos }: AuthPageProps) {
 
     return (
         <Layout>
-            <WebsiteInfo title={title} favicon={favicon} />
+            <WebsiteInfo title={title} favicon={favicon} centered={true} />
             <Typography className={classes.text}>
                 requested information
             </Typography>
