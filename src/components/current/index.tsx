@@ -9,7 +9,7 @@ import {
 
 type CurrentInfo = {
     label: string,
-    data: string,
+    data: string | number,
 };
 
 type CurrentInfoPageProps = {
