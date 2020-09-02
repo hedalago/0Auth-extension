@@ -39,13 +39,12 @@ const useStyles = makeStyles(() => ({
     },
 }));
 
-// TODO: Add WebsiteInfo component at the top of this view
 export default function RegisterPage({ title, favicon, dynamicFormInputs }: RegisterPageProps) {
     const classes = useStyles();
 
     return (
         <Layout>
-            <WebsiteInfo title={title} favicon={favicon} />
+            <WebsiteInfo title={title} favicon={favicon} centered={true} />
             <form className={classes.form}>
                 {
                     dynamicFormInputs.map(props => {

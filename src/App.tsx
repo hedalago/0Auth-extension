@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { LoginPage, RegisterPage, AuthPage, MainPage } from './components';
+import { LoginPage, SettingPage, RegisterPage, AuthPage, MainPage } from './components';
 
 export default function App() {
   const dummyData = {
@@ -74,6 +74,7 @@ export default function App() {
   return (
     <div className="App">
       <LoginPage />
+      <SettingPage />
       <RegisterPage 
         favicon={dummyData.favicon} 
         title={dummyData.title} 
