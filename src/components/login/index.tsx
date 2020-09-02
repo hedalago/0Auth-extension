@@ -1,5 +1,10 @@
 import React from 'react';
-import { Typography, TextField, makeStyles } from '@material-ui/core';
+import { 
+    Button, 
+    Typography, 
+    TextField, 
+    makeStyles 
+} from '@material-ui/core';
 import LockOpenIcon from '@material-ui/icons/LockOpen';
 
 import { BaseButton } from '../common';
@@ -35,6 +40,11 @@ const useStyles = makeStyles(() => ({
             borderBottomColor: '#1976d2',
         },
     },
+    setPass: {
+        color: 'gray',
+        textDecoration: 'underline',
+        fontSize: 12,
+    },
 }));
 
 // TODO: specify properties and their types
@@ -51,8 +61,9 @@ export default function LoginPage() {
                 <TextField className={classes.input} type="password" label="Password" />
                 <BaseButton icon={<LockOpenIcon />}>
                     Start 0auth
-                </BaseButton> 
+                </BaseButton>
             </form>
+            <Button className={classes.setPass}>Set your password</Button>
         </Layout>
     );
 };
