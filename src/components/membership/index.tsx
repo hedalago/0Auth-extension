@@ -20,18 +20,18 @@ import { WebsiteInfo } from '../common';
 type RegistrationInfo = {
     label: string,
     data: string | number,
-}
+};
 
 type Membership = {
     title: string,
     favicon: string,
     signature: string,
     infos: Array<RegistrationInfo>,
-}
+};
 
 type MembershipListPageProps = {
     memberships: Array<Membership>,
-}
+};
 
 const useStyles = makeStyles(() => ({
     wrapper: {

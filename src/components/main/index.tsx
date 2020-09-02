@@ -15,8 +15,6 @@ import CloseIcon from '@material-ui/icons/Close';
 import { TransitionProps } from '@material-ui/core/transitions';
 import MuiDialogTitle from '@material-ui/core/DialogTitle';
 
-
-
 import Layout from '../layout';
 import { HistoryListPage, CurrentLInfoPage, MembershipListPage } from '..';
 import { WebsiteInfo } from '../common';
@@ -118,7 +116,7 @@ function a11yProps(index: number) {
 
 type DialogHeaderProps = {
     onClose: () => void,
-}
+};
 
 const DialogHeader = ((props: DialogHeaderProps) => {
     const { onClose } = props;
@@ -133,7 +131,7 @@ const DialogHeader = ((props: DialogHeaderProps) => {
         ) : null}
       </MuiDialogTitle>
     );
-  });
+});
 
 const Transition = React.forwardRef(function Transition(
     props: TransitionProps & { children?: React.ReactElement },
@@ -237,6 +235,44 @@ const dummyMemberships = [
     },
 ];
 
+const dummyHistoryLogs = [
+    {
+        type: 'AUTHENTICATION',
+        createdAt: '2020-09-01',
+        origin: 'https://www.naver.com',        
+    },
+    {
+        type: 'REGISTRATION',
+        createdAt: '2020-08-31',
+        origin: 'https://www.naver.com',        
+    },
+    {
+        type: 'AUTHENTICATION',
+        createdAt: '2020-07-01',
+        origin: 'https://www.kakaocorp.com',        
+    },
+    {
+        type: 'REGISTRATION',
+        createdAt: '2020-07-01',
+        origin: 'https://www.kakaocorp.com',        
+    },
+    {
+        type: 'AUTHENTICATION',
+        createdAt: '2020-05-01',
+        origin: 'https://www.facebook.com',        
+    },
+    {
+        type: 'REGISTRATION',
+        createdAt: '2020-05-01',
+        origin: 'https://www.facebook.com',        
+    },
+    {
+        type: 'AUTHENTICATION',
+        createdAt: '2020-01-01',
+        origin: 'https://www.google.com',        
+    },
+]
+
 export default function MainPage({ title, favicon, currentInfos, signature }: MainPageProps) {
     const classes = useStyles();
 
@@ -283,10 +319,14 @@ export default function MainPage({ title, favicon, currentInfos, signature }: Ma
                     <MembershipListPage memberships={dummyMemberships} />
                 </TabPanel>
                 <TabPanel value={value} index={1}>
-                    <Button className={classes.seeMore} startIcon={<FullscreenIcon />}>
+                    <Button className={classes.seeMore} startIcon={<FullscreenIcon />} onClick={handleClickOpen}>
                         Full Screen
                     </Button>
-                    <HistoryListPage />
+                    <Dialog open={open} fullScreen onClose={handleClose} TransitionComponent={Transition}>
+                        <DialogHeader onClose={handleClose} />
+                        <HistoryListPage histories={dummyHistoryLogs} />
+                    </Dialog>
+                    <HistoryListPage histories={dummyHistoryLogs} />
                 </TabPanel>
             </Box>
         </Layout>
