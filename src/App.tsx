@@ -1,6 +1,7 @@
 import React from 'react';
 
-import { LoginPage, SettingPage, RegisterPage, AuthPage, MainPage } from './components';
+import {LoginPage, SettingPage, RegisterPage, AuthPage, MainPage} from './components';
+import {BrowserRouter, Switch} from "react-router-dom";
 
 export default function App() {
   const dummyData = {
@@ -72,30 +73,27 @@ export default function App() {
   };
 
   return (
-    <div className="App">
-      <LoginPage />
-      <SettingPage />
-      <RegisterPage 
-        favicon={dummyData.favicon} 
-        title={dummyData.title} 
-        dynamicFormInputs={dummyData.formInputs} 
-      />
-      <AuthPage 
-        favicon={dummyData.favicon} 
-        title={dummyData.title} 
-        reqInfos={dummyData.reqInfos} 
-      />
-      <RegisterPage 
-        favicon={dummyData.favicon} 
-        title={dummyData.title} 
-        dynamicFormInputs={dummyData.formInputs}
-      />
-      <MainPage 
-        favicon={dummyData.favicon} 
-        title={dummyData.title} 
-        currentInfos={dummyData.currentInfos} 
-        signature={dummyData.signature} 
-      />
-    </div>
+    <BrowserRouter>
+      <Switch>
+        <MainPage
+          path='/main'
+          favicon={dummyData.favicon}
+          title={dummyData.title}
+          currentInfos={dummyData.currentInfos}
+          signature={dummyData.signature}/>
+        <LoginPage path='/login'/>
+        <SettingPage path='/settings'/>
+        <RegisterPage
+          path='/register'
+          favicon={dummyData.favicon}
+          title={dummyData.title}
+          dynamicFormInputs={dummyData.formInputs}/>
+        <AuthPage
+          path='/auth'
+          favicon={dummyData.favicon}
+          title={dummyData.title}
+          reqInfos={dummyData.reqInfos}/>
+      </Switch>
+    </BrowserRouter>
   );
 };
