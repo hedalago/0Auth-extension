@@ -11,6 +11,7 @@ import {BaseButton} from '../common';
 import Page from "../page/public";
 import {loginStore} from "../../stores";
 import {observer} from "mobx-react";
+import { useHistory } from 'react-router-dom';
 
 type LoginPageProps = {
   path: string;
@@ -51,6 +52,15 @@ const useStyles = makeStyles(() => ({
 
 // TODO: specify properties and their types
 const LoginPage = observer(({path}: LoginPageProps) => {
+  const history = useHistory();
+  const login = () => {
+    if (loginStore.login()) {
+      // TODO: should move prev page
+      history.push('/');
+    } else {
+      // TODO: show login fail message
+    }
+  }
   const classes = useStyles();
   return (
     <Page path={path}>
@@ -60,7 +70,7 @@ const LoginPage = observer(({path}: LoginPageProps) => {
       </Typography>
       <form className={classes.form}>
         <TextField className={classes.input} value={loginStore.password} onChange={e => loginStore.setPassword(e.target.value)} type="password" label="Password"/>
-        <BaseButton icon={<LockOpenIcon/>} onClick={_ => loginStore.login()}>
+        <BaseButton icon={<LockOpenIcon/>} onClick={login}>
           Start 0auth
         </BaseButton>
       </form>

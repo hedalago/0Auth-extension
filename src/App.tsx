@@ -1,7 +1,7 @@
 import React from 'react';
 
 import {LoginPage, SettingPage, RegisterPage, AuthPage, MainPage} from './components';
-import {BrowserRouter, Switch} from "react-router-dom";
+import {BrowserRouter, Switch, Redirect} from "react-router-dom";
 
 export default function App() {
   const dummyData = {
@@ -93,6 +93,7 @@ export default function App() {
           favicon={dummyData.favicon}
           title={dummyData.title}
           reqInfos={dummyData.reqInfos}/>
+        <Redirect from='/' to='/main' />
       </Switch>
     </BrowserRouter>
   );

@@ -2,11 +2,6 @@ import {makeAutoObservable} from 'mobx';
 import {propertyStore} from "../index";
 import {hash} from "@0auth/message";
 
-type LoginType = {
-  isLogin: boolean;
-  password: string;
-}
-
 class Login {
   isLogin: boolean = false;
   password: string = '';
@@ -18,7 +13,10 @@ class Login {
   }
 
   init() {
-    chrome.storage.local.get(['hash'], async data => {
+    if (chrome.storage === undefined) {
+      return;
+    }
+    chrome.storage.local.get('hash', async data => {
       const hash = data.hash;
       if (hash === undefined) {
         return;
@@ -28,22 +26,28 @@ class Login {
   }
 
   signup() {
+    if (chrome.storage === undefined) {
+      return;
+    }
     this.isLogin = true;
     this.hash = hash(this.password);
-    const key = hash(this.password+this.hash);
+    const key = hash(`${this.password}${this.hash}`);
+    chrome.storage.local.set({'hash': this.hash});
     propertyStore.storeKey(key);
     propertyStore.setKey(key);
   }
 
-  login() {
+  login(): boolean {
     if (this.hash === '') {
       this.signup();
-      return ;
+      return true;
     }
     if (hash(this.password) === this.hash) {
       this.isLogin = true;
-      propertyStore.setKey(hash(this.password+this.hash))
+      propertyStore.setKey(hash(this.password + this.hash));
+      return true;
     }
+    return false;
   }
 
   setPassword(password: string) {
