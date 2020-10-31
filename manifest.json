@@ -13,6 +13,6 @@
   "icons": {
     "128": "public/icon.png"
   },
-  "content_security_policy": "script-src 'self' 'sha256-qILRdnleFFB8nUofQbeggst+MRykHHDGiqtfJvKdtPY='",
+  "content_security_policy": "script-src 'self' 'sha256-/U7yBM5I9QXyu5e9HHzfWjRJaVOkFHyM2S057j5ackU='",
   "manifest_version": 2
 }

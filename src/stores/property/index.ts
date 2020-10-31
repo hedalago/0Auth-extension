@@ -1,11 +1,6 @@
 import {makeAutoObservable} from 'mobx';
-import {hash, Property, Signature} from "@0auth/message";
-import {decryptMessage, encryptMessage, generateRandomKey} from "@0auth/client/lib/utils";
-
-type LoginType = {
-  isLogin: boolean;
-  password: string;
-}
+import {Property, Signature} from "@0auth/message";
+import {decryptMessage, encryptMessage} from "@0auth/client/lib/utils";
 
 class UserProperty {
   isStored: boolean = false;
@@ -20,6 +15,9 @@ class UserProperty {
   }
 
   init() {
+    if (chrome.storage === undefined) {
+      return ;
+    }
     chrome.storage.local.get(['encrypt'], async data => {
       const encryptedData = data.encrypt;
       if (encryptedData === undefined) {
@@ -31,6 +29,9 @@ class UserProperty {
   }
 
   storeKey(key: string) {
+    if (chrome.storage === undefined) {
+      return ;
+    }
     chrome.storage.local.set({key: key}, () => console.log('키가 저장되었습니다.'))
   }
 
@@ -46,6 +47,9 @@ class UserProperty {
 
   updateStorage() {
     this.encryptedData = encryptMessage(JSON.stringify({properties: this.properties, sign: this.sign}), this.key);
+    if (chrome.storage === undefined) {
+      return ;
+    }
     chrome.storage.local.set({encrypt: this.encryptedData}, () => console.log('기록되었습니다.'))
   }
 
