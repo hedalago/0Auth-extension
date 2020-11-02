@@ -61,20 +61,27 @@ const LoginPage = observer(({path}: LoginPageProps) => {
       // TODO: show login fail message
     }
   }
+  const enter = (e: React.KeyboardEvent<HTMLDivElement>) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      login();
+    }
+  }
+
   const classes = useStyles();
   return (
-    <Page path={path}>
+    <Page>
       <div className={classes.topSpacing}/>
       <Typography className={classes.head} variant="h1">
         0auth
       </Typography>
       <form className={classes.form}>
-        <TextField className={classes.input} value={loginStore.password} onChange={e => loginStore.setPassword(e.target.value)} type="password" label="Password"/>
+        <TextField className={classes.input} onKeyPress={e => enter(e)} value={loginStore.password} onChange={e => loginStore.setPassword(e.target.value)} type="password" label="Password"/>
         <BaseButton icon={<LockOpenIcon/>} onClick={login}>
           Start 0auth
         </BaseButton>
       </form>
-      <Button className={classes.setPass}>Set your password</Button>
+      <Button onClick={e => history.push('/settings')} className={classes.setPass}>Set your password</Button>
     </Page>
   );
 });

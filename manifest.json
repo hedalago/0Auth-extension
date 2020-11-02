@@ -2,7 +2,7 @@
   "name": "0Auth Extension",
   "version": "1.0",
   "description": "Chrome Extension for 0Auth",
-  "permissions": ["declarativeContent", "storage"],
+  "permissions": ["activeTab", "declarativeContent", "storage"],
   "browser_action": {
     "default_popup": "build/index.html",
     "default_title": "0Auth",
@@ -13,6 +13,13 @@
   "icons": {
     "128": "public/icon.png"
   },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "all_frames": true,
+      "js": ["background/contentScript.js"]
+    }
+  ],
   "content_security_policy": "script-src 'self' 'sha256-/U7yBM5I9QXyu5e9HHzfWjRJaVOkFHyM2S057j5ackU='",
   "manifest_version": 2
 }

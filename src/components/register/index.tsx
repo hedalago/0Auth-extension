@@ -3,21 +3,15 @@ import {TextField, Box, makeStyles} from '@material-ui/core';
 
 import {BaseButton, WebsiteInfo} from '../common';
 import {PrivatePage} from "../page";
+import {currentStore} from "../../stores";
 
-type DynamicFormInput = {
+// TODO: Should move to 0auth library!
+export type DynamicFormInput = {
   type: string;
   label: string;
   required: boolean;
   name?: string;
-  placeholder?: string;
 }
-
-type RegisterPageProps = {
-  favicon: string;
-  title: string;
-  dynamicFormInputs: DynamicFormInput[];
-  path: string;
-};
 
 const useStyles = makeStyles(() => ({
   form: {
@@ -40,19 +34,19 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-export default function RegisterPage({title, favicon, dynamicFormInputs, path}: RegisterPageProps) {
+export default function RegisterPage() {
   const classes = useStyles();
 
   return (
-    <PrivatePage path={path}>
-      <WebsiteInfo title={title} favicon={favicon} centered={true}/>
+    <PrivatePage>
+      <WebsiteInfo title={currentStore.getTitle()} favicon={currentStore.getFavicon()} centered={true}/>
       <form className={classes.form}>
         {
-          dynamicFormInputs.map(props => {
-            const {type, name, label, placeholder, required} = props;
+          currentStore.form.map(props => {
+            const {type, name, label, required} = props;
             const isDateInput = type === 'date';
             const year = new Date().getFullYear();
-            const defaultDate = `${year}-01-01`
+            const defaultDate = `${year}-01-01`;
 
             return (
               <Box>
@@ -62,9 +56,8 @@ export default function RegisterPage({title, favicon, dynamicFormInputs, path}: 
                   label={label}
                   defaultValue={isDateInput ? defaultDate : ''}
                   name={name || ''}
-                  placeholder={placeholder || ''}
-                  required={required || false}
-                />
+                  placeholder={name || ''}
+                  required={required || false}/>
               </Box>
             )
           })
