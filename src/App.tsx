@@ -1,7 +1,7 @@
 import React from 'react';
 
 import {LoginPage, SettingPage, RegisterPage, AuthPage, MainPage} from './components';
-import {BrowserRouter, Switch, Redirect} from "react-router-dom";
+import {BrowserRouter, Switch, Link, Route, Redirect} from "react-router-dom";
 
 export default function App() {
   const dummyData = {
@@ -74,26 +74,19 @@ export default function App() {
 
   return (
     <BrowserRouter>
+      <Link to='/register'>register</Link>
+      <Link to='/auth'>auth</Link>
       <Switch>
-        <MainPage
-          path='/main'
-          favicon={dummyData.favicon}
-          title={dummyData.title}
-          currentInfos={dummyData.currentInfos}
-          signature={dummyData.signature}/>
-        <LoginPage path='/login'/>
-        <SettingPage path='/settings'/>
-        <RegisterPage
-          path='/register'
-          favicon={dummyData.favicon}
-          title={dummyData.title}
-          dynamicFormInputs={dummyData.formInputs}/>
-        <AuthPage
-          path='/auth'
-          favicon={dummyData.favicon}
-          title={dummyData.title}
-          reqInfos={dummyData.reqInfos}/>
-        <Redirect from='/' to='/main' />
+        <Route exact path='/main' render={() =>
+          <MainPage
+            currentInfos={dummyData.currentInfos}
+            signature={dummyData.signature}/>}/>
+        <Route path='/login' component={LoginPage}/>
+        <Route path='/settings' component={SettingPage}/>
+        <Route path='/register' component={RegisterPage}/>
+        <Route path='/auth' render={() =>
+          <AuthPage reqInfos={dummyData.reqInfos}/>}/>
+        <Redirect from='/' to='/main'/>
       </Switch>
     </BrowserRouter>
   );

@@ -9,17 +9,16 @@ import {
 
 import {WebsiteInfo, BaseButton} from '../common';
 import {PrivatePage} from '../page';
+import {currentStore} from "../../stores";
 
+// TODO: Move to 0auth library!
 type RequestedInfo = {
   label: string;
   required: boolean;
 }
 
 type AuthPageProps = {
-  title: string;
-  favicon: string;
   reqInfos: Array<RequestedInfo>;
-  path: string;
 }
 
 const useStyles = makeStyles(() => ({
@@ -59,12 +58,12 @@ const useStyles = makeStyles(() => ({
   }
 }));
 
-export default function AuthPage({title, favicon, reqInfos, path}: AuthPageProps) {
+export default function AuthPage({reqInfos}: AuthPageProps) {
   const classes = useStyles();
 
   return (
-    <PrivatePage path={path}>
-      <WebsiteInfo title={title} favicon={favicon} centered={true}/>
+    <PrivatePage>
+      <WebsiteInfo title={currentStore.getTitle()} favicon={currentStore.getFavicon()} centered={true}/>
       <Typography className={classes.text}>
         requested information
       </Typography>

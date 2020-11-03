@@ -18,6 +18,7 @@ import MuiDialogTitle from '@material-ui/core/DialogTitle';
 import {PrivatePage} from '../page';
 import {HistoryListPage, CurrentLInfoPage, MembershipListPage} from '..';
 import {WebsiteInfo} from '../common';
+import {currentStore} from "../../stores";
 
 type CurrentInfo = {
   label: string,
@@ -25,11 +26,8 @@ type CurrentInfo = {
 };
 
 type MainPageProps = {
-  title: string;
-  favicon: string;
   currentInfos: Array<CurrentInfo>;
   signature: string;
-  path: string;
 };
 
 type TabPanelProps = {
@@ -274,7 +272,7 @@ const dummyHistoryLogs = [
   },
 ]
 
-export default function MainPage({title, favicon, currentInfos, signature, path}: MainPageProps) {
+export default function MainPage({currentInfos, signature}: MainPageProps) {
   const classes = useStyles();
 
   const [value, setValue] = useState(0);
@@ -293,9 +291,9 @@ export default function MainPage({title, favicon, currentInfos, signature, path}
   };
 
   return (
-    <PrivatePage path={path}>
+    <PrivatePage>
       <Box className={classes.topWrapper}>
-        <WebsiteInfo title={title} favicon={favicon} centered={true}/>
+        <WebsiteInfo title={currentStore.getTitle()} favicon={currentStore.getFavicon()} centered={true}/>
         <CurrentLInfoPage currentInfos={currentInfos} signature={signature}/>
       </Box>
       <Box className={classes.bottomWrapper}>

@@ -10,7 +10,7 @@ import {BaseButton} from '../common';
 import {Page} from "../page";
 
 type SettingPageProps = {
-  path: string;
+  // TODO: Fill the setting page props
 }
 
 const useStyles = makeStyles(() => ({
@@ -37,11 +37,11 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-export default function SettingPage({path}: SettingPageProps) {
+export default function SettingPage() {
   const classes = useStyles();
 
   return (
-    <Page path={path}>
+    <Page>
       <Container className={classes.container}>
         <Typography className={classes.title}>
           Password setting

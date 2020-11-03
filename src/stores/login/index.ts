@@ -26,15 +26,14 @@ class Login {
   }
 
   signup() {
-    if (chrome.storage === undefined) {
-      return;
-    }
     this.isLogin = true;
     this.hash = hash(this.password);
     const key = hash(`${this.password}${this.hash}`);
-    chrome.storage.local.set({'hash': this.hash});
     propertyStore.storeKey(key);
     propertyStore.setKey(key);
+    if (chrome.storage !== undefined) {
+      chrome.storage.local.set({'hash': this.hash});
+    }
   }
 
   login(): boolean {
