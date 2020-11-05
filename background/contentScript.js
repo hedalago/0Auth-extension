@@ -1,4 +1,4 @@
-window.addEventListener('message', function(event) {
+window.addEventListener('message', function (event) {
   // We only accept messages from ourselves
   if (event.source !== window)
     return;
@@ -10,3 +10,9 @@ window.addEventListener('message', function(event) {
     });
   }
 }, false);
+
+chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+  if (request.from && request.from === 'popup') {
+    window.postMessage({from: 'content', data: request}, "*");
+  }
+});
