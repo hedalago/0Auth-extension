@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useCallback} from 'react';
 import {
   Box,
   Button,
@@ -10,16 +10,7 @@ import {
 import {WebsiteInfo, BaseButton} from '../common';
 import {PrivatePage} from '../page';
 import {currentStore} from "../../stores";
-
-// TODO: Move to 0auth library!
-type RequestedInfo = {
-  label: string;
-  required: boolean;
-}
-
-type AuthPageProps = {
-  reqInfos: Array<RequestedInfo>;
-}
+import {Property} from "@0auth/message";
 
 const useStyles = makeStyles(() => ({
   chipWrapper: {
@@ -58,8 +49,12 @@ const useStyles = makeStyles(() => ({
   }
 }));
 
-export default function AuthPage({reqInfos}: AuthPageProps) {
+export default function AuthPage() {
   const classes = useStyles();
+  const approveHandler = useCallback((e: React.MouseEvent<{}, MouseEvent>) => {
+    e.preventDefault();
+    currentStore.auth();
+  }, []);
 
   return (
     <PrivatePage>
@@ -70,16 +65,14 @@ export default function AuthPage({reqInfos}: AuthPageProps) {
       <Box className={classes.chipWrapper}>
         <div>
           {
-            reqInfos.map((i: RequestedInfo) => {
-              return (
-                <Chip
-                  className={classes.chip}
-                  key={i.label}
-                  label={`${i.label.toLowerCase()}${i.required ? ' *' : ''}`}
-                  variant={i.required ? 'default' : 'outlined'}
-                />
-              )
-            })
+            currentStore.properties.map((property: Property) => (
+              <Chip
+                className={classes.chip}
+                key={property.key}
+                label={`${property.key.toLowerCase()}*`}
+                variant='default'
+              />
+            ))
           }
         </div>
       </Box>
@@ -90,7 +83,7 @@ export default function AuthPage({reqInfos}: AuthPageProps) {
       </Typography>
       <Box className={classes.buttonWrapper}>
         <Button className={classes.button} variant="contained" size="large">Decline</Button>
-        <BaseButton>Approve</BaseButton>
+        <BaseButton onClick={approveHandler}>Approve</BaseButton>
       </Box>
     </PrivatePage>
   );

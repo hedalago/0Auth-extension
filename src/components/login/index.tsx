@@ -13,10 +13,6 @@ import {loginStore} from "../../stores";
 import {observer} from "mobx-react";
 import { useHistory } from 'react-router-dom';
 
-type LoginPageProps = {
-  path: string;
-};
-
 const useStyles = makeStyles(() => ({
   topSpacing: {
     height: 160,
@@ -51,7 +47,7 @@ const useStyles = makeStyles(() => ({
 }));
 
 // TODO: specify properties and their types
-const LoginPage = observer(({path}: LoginPageProps) => {
+const LoginPage = observer(() => {
   const history = useHistory();
   const login = () => {
     if (loginStore.login()) {

@@ -2,8 +2,7 @@ import React from 'react';
 import {Container, makeStyles} from '@material-ui/core';
 import { useHistory } from 'react-router-dom';
 import {currentStore} from "../../../stores";
-import {Property, Signature} from "@0auth/message";
-import {DynamicFormInput} from "../../register";
+import {DynamicFormInput} from "@0auth/client";
 
 type LayoutProps = {
   children: JSX.Element[] | JSX.Element;
@@ -30,20 +29,20 @@ export default function Page({children}: LayoutProps) {
     history.push('/register');
     currentStore.setRegister(form);
   };
-  const auth = (properties: Property[] | undefined, sign: Signature | undefined) => {
+  const auth = (host: string | undefined) => {
     history.push('/auth');
-    if (properties !== undefined) {
-      currentStore.setAuth(properties, sign);
+    if (host !== undefined) {
+      currentStore.setAuth(host);
     }
   };
   if (chrome.runtime !== undefined && chrome.runtime.onMessage !== undefined) {
-    chrome.runtime.onMessage.addListener((msg, sender, response) => {
+    chrome.runtime.onMessage.addListener((msg, _sender, _response) => {
       switch (msg.data.type) {
         case 'REGISTER':
           register(msg.data.form as DynamicFormInput[]);
           break;
         case 'AUTH':
-          auth(msg.data.properties as Property[], msg.data.sign as Signature);
+          auth(msg.data.host as string);
           break;
         default:
           throw Error('Unreachable Code in onMessage');

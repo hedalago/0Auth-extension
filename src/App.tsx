@@ -84,8 +84,7 @@ export default function App() {
         <Route path='/login' component={LoginPage}/>
         <Route path='/settings' component={SettingPage}/>
         <Route path='/register' component={RegisterPage}/>
-        <Route path='/auth' render={() =>
-          <AuthPage reqInfos={dummyData.reqInfos}/>}/>
+        <Route path='/auth' component={AuthPage}/>
         <Redirect from='/' to='/main'/>
       </Switch>
     </BrowserRouter>

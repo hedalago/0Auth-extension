@@ -2,22 +2,21 @@
 # yarn lockfile v1
 
 
-"@0auth/client@1.0.8":
-  version "1.0.8"
-  resolved "https://registry.yarnpkg.com/@0auth/client/-/client-1.0.8.tgz#69af8311f4af6690de82a2ffd3e1b6dcc6db809b"
-  integrity sha512-ovuGAfIVTG32/YMHBlXsJWB+K0TLKbHt0cMXt9jv/ArjwxhPh7+RhWWItMd3oh8ZDb+pBdUMDjwydtM7HR/0lQ==
+"@0auth/client@^1.0.12":
+  version "1.0.12"
+  resolved "https://registry.yarnpkg.com/@0auth/client/-/client-1.0.12.tgz#fc87606ffd36a93f4fdfc3ad55ce6b63a28d638d"
+  integrity sha512-nL1go+1knCvsy6j8D6CNv1w3IJjtassOZD78yURNw9kizehyJkdzLmBRE/y/+0OVDKOuseUwuIO/cuHAugtqPg==
   dependencies:
     "@0auth/message" "^1.0.8"
     axios "^0.19.2"
     crypto-js "^4.0.0"
     typescript-optional "^2.0.1"
 
-"@0auth/message@1.0.8", "@0auth/message@^1.0.8":
-  version "1.0.8"
-  resolved "https://registry.yarnpkg.com/@0auth/message/-/message-1.0.8.tgz#6b03860dfb7daf0e7f470a079d0ae292465a0ece"
-  integrity sha512-FEwLkCwIquyuyNvhHmHxzepXkbQHNCErRGzoHZwBiqG1VVm3tKC4FRkhXdAvDu1bq40AopwdyznRC5LrjCPPhw==
+"@0auth/message@^1.0.12", "@0auth/message@^1.0.8":
+  version "1.0.12"
+  resolved "https://registry.yarnpkg.com/@0auth/message/-/message-1.0.12.tgz#a6b3a4cf90d3a5fe36c332b1f7e3dbcc681d57ad"
+  integrity sha512-cz0mJA+DkpKQmGCnRPMLEpFNeuIwL6793SWAgg0oDuQ4wzidRCqQ/mdY8FzJudENO1qWCx88mhqQKJ0RuoDf0g==
   dependencies:
-    "@0auth/message" "^1.0.8"
     crypto-js "^4.0.0"
 
 "@babel/code-frame@7.8.3", "@babel/code-frame@^7.0.0", "@babel/code-frame@^7.8.3":
@@ -1603,6 +1602,11 @@
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/@types/color-name/-/color-name-1.1.1.tgz#1c1261bbeaa10a8055bbc5d8ab84b7b2afc846a0"
   integrity sha512-rr+OQyAjxze7GgWrSaJwydHStIhHq2lvY3BOC2Mj7KnzI7XK0Uw1TOOdI9lDoajEbSWLiYgoo4f1R51erQfhPQ==
+
+"@types/crypto-js@^4.0.1":
+  version "4.0.1"
+  resolved "https://registry.yarnpkg.com/@types/crypto-js/-/crypto-js-4.0.1.tgz#3a4bd24518b0e6c5940da4e2659eeb2ef0806963"
+  integrity sha512-6+OPzqhKX/cx5xh+yO8Cqg3u3alrkhoxhE5ZOdSEv0DOzJ13lwJ6laqGU0Kv6+XDMFmlnGId04LtY22PsFLQUw==
 
 "@types/eslint-visitor-keys@^1.0.0":
   version "1.0.0"
