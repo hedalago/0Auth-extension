@@ -1,6 +1,7 @@
-import {makeAutoObservable} from 'mobx';
-import {propertyStore} from "../index";
-import {hash} from "@0auth/message";
+import { makeAutoObservable } from 'mobx';
+import { hash } from '@0auth/message';
+
+import { propertyStore } from '../index';
 
 class Login {
   isLogin: boolean = false;
@@ -8,7 +9,7 @@ class Login {
   hash: string = '';
 
   constructor() {
-    makeAutoObservable(this)
+    makeAutoObservable(this);
     this.init();
   }
 
@@ -16,7 +17,7 @@ class Login {
     if (chrome.storage === undefined) {
       return;
     }
-    chrome.storage.local.get('hash', async data => {
+    chrome.storage.local.get('hash', async (data) => {
       const hash = data.hash;
       if (hash === undefined) {
         return;
@@ -32,7 +33,7 @@ class Login {
     propertyStore.storeKey(key);
     propertyStore.setKey(key);
     if (chrome.storage !== undefined) {
-      chrome.storage.local.set({'hash': this.hash});
+      chrome.storage.local.set({ hash: this.hash });
     }
   }
 

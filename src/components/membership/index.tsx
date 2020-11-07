@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import {
   Box,
   Button,
@@ -11,26 +11,26 @@ import {
   ListItemIcon,
   Popover,
   Typography,
-  makeStyles
+  makeStyles,
 } from '@material-ui/core';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 
-import {WebsiteInfo} from '../common';
+import { WebsiteInfo } from '../common';
 
 type RegistrationInfo = {
-  label: string,
-  data: string | number,
+  label: string;
+  data: string | number;
 };
 
 type Membership = {
-  title: string,
-  favicon: string,
-  signature: string,
-  infos: Array<RegistrationInfo>,
+  title: string;
+  favicon: string;
+  signature: string;
+  infos: Array<RegistrationInfo>;
 };
 
 type MembershipListPageProps = {
-  memberships: Array<Membership>,
+  memberships: Array<Membership>;
 };
 
 const useStyles = makeStyles(() => ({
@@ -67,12 +67,16 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-export default function MembershipListPage({memberships}: MembershipListPageProps) {
+export default function MembershipListPage({
+  memberships,
+}: MembershipListPageProps) {
   const classes = useStyles();
   const [openId, setOpenId] = useState<string | null>(null);
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
 
-  const handlePopoverOpen = (event: React.MouseEvent<HTMLElement, MouseEvent>) => {
+  const handlePopoverOpen = (
+    event: React.MouseEvent<HTMLElement, MouseEvent>,
+  ) => {
     setAnchorEl(event.currentTarget);
   };
 
@@ -93,83 +97,92 @@ export default function MembershipListPage({memberships}: MembershipListPageProp
   return (
     <Box className={classes.wrapper}>
       <List component="nav">
-        {
-          memberships.map((membership, index) => {
-            const id = `${index}-${membership.title}`;
-            return (
-              <span key={membership.title}>
-                <ListItem className={classes.listItem} button divider
-                          onClick={() => handleClickOpen(id)}>
-                  <WebsiteInfo title={membership.title} favicon={membership.favicon}/>
-                  <ListItemIcon>
-                      <ChevronRightIcon/>
-                  </ListItemIcon>
-                </ListItem>
-                <Dialog
-                  keepMounted
-                  open={id === openId}
-                  onClose={handleClose}
-                  classes={{paper: classes.dialog}}
-                  style={{backgroundColor: 'transparent'}}
-                  BackdropProps={{
-                    classes: {
-                      root: classes.backDrop,
-                    }
-                  }}
-                >
-                  <DialogTitle
-                    id={`${membership.title}-dialog-title`}>{membership.title}</DialogTitle>
-                  <DialogContent>
-                      {
-                        membership.infos.map((i) => {
-                          return (
-                            <Typography key={i.label} className={classes.text}>
-                              {i.label.toLowerCase()} : {i.data}
-                            </Typography>
-                          )
-                        })
-                      }
-                    <Typography
-                      className={classes.text}
-                      aria-owns={id === openId ? 'mouse-over-popover' : undefined}
-                      aria-haspopup="true"
-                      onMouseEnter={handlePopoverOpen}
-                      onMouseLeave={handlePopoverClose}
-                      noWrap
-                    >
-                          sign : 0x{membership.signature}
-                    </Typography>
-                    <Popover
-                      id="mouse-over-popover"
-                      className={classes.popover}
-                      open={popoverOpen}
-                      anchorEl={anchorEl}
-                      anchorOrigin={{
-                        vertical: 'bottom',
-                        horizontal: 'left',
-                      }}
-                      transformOrigin={{
-                        vertical: 'top',
-                        horizontal: 'left',
-                      }}
-                      onClose={handlePopoverClose}
-                      disableRestoreFocus>
-                      <Typography className={classes.popoverText}>
-                          0x{membership.signature}
+        {memberships.map((membership, index) => {
+          const id = `${index}-${membership.title}`;
+          return (
+            <span key={membership.title}>
+              <ListItem
+                className={classes.listItem}
+                button
+                divider
+                onClick={() => handleClickOpen(id)}
+              >
+                <WebsiteInfo
+                  title={membership.title}
+                  favicon={membership.favicon}
+                />
+                <ListItemIcon>
+                  <ChevronRightIcon />
+                </ListItemIcon>
+              </ListItem>
+              <Dialog
+                keepMounted
+                open={id === openId}
+                onClose={handleClose}
+                classes={{ paper: classes.dialog }}
+                style={{ backgroundColor: 'transparent' }}
+                BackdropProps={{
+                  classes: {
+                    root: classes.backDrop,
+                  },
+                }}
+              >
+                <DialogTitle id={`${membership.title}-dialog-title`}>
+                  {membership.title}
+                </DialogTitle>
+                <DialogContent>
+                  {membership.infos.map((i) => {
+                    return (
+                      <Typography key={i.label} className={classes.text}>
+                        {i.label.toLowerCase()} : {i.data}
                       </Typography>
-                    </Popover>
-                    </DialogContent>
-                    <DialogActions>
-                    <Button onClick={handleClose} className={classes.closeButton} autoFocus>
-                        Close
-                    </Button>
-                    </DialogActions>
-                </Dialog>
+                    );
+                  })}
+                  <Typography
+                    className={classes.text}
+                    aria-owns={id === openId ? 'mouse-over-popover' : undefined}
+                    aria-haspopup="true"
+                    onMouseEnter={handlePopoverOpen}
+                    onMouseLeave={handlePopoverClose}
+                    noWrap
+                  >
+                    sign : 0x{membership.signature}
+                  </Typography>
+                  <Popover
+                    id="mouse-over-popover"
+                    className={classes.popover}
+                    open={popoverOpen}
+                    anchorEl={anchorEl}
+                    anchorOrigin={{
+                      vertical: 'bottom',
+                      horizontal: 'left',
+                    }}
+                    transformOrigin={{
+                      vertical: 'top',
+                      horizontal: 'left',
+                    }}
+                    onClose={handlePopoverClose}
+                    disableRestoreFocus
+                  >
+                    <Typography className={classes.popoverText}>
+                      0x{membership.signature}
+                    </Typography>
+                  </Popover>
+                </DialogContent>
+                <DialogActions>
+                  <Button
+                    onClick={handleClose}
+                    className={classes.closeButton}
+                    autoFocus
+                  >
+                    Close
+                  </Button>
+                </DialogActions>
+              </Dialog>
             </span>
-            )
-          })
-        }
+          );
+        })}
       </List>
     </Box>
   );
-};
+}

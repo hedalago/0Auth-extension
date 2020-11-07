@@ -1,9 +1,16 @@
-import {makeAutoObservable} from 'mobx';
-import {Property, PropertyData, PropertyDataType, PropertyType, Signature} from "@0auth/message";
-import {defaultValue} from "@0auth/message/lib/type/defaultValue";
-import {DynamicFormInput} from "@0auth/client";
-import {sendToWebsite} from "../../extension";
-import {propertyStore} from "../index";
+import { makeAutoObservable } from 'mobx';
+import {
+  Property,
+  PropertyData,
+  PropertyDataType,
+  PropertyType,
+  Signature,
+} from '@0auth/message';
+import { defaultValue } from '@0auth/message/lib/type/defaultValue';
+import { DynamicFormInput } from '@0auth/client';
+
+import { sendToWebsite } from '../../extension';
+import { propertyStore } from '../index';
 
 class Current {
   title: string | undefined = undefined;
@@ -17,11 +24,11 @@ class Current {
   }
 
   auth() {
-    sendToWebsite({sign: this.sign, properties: this.properties});
+    sendToWebsite({ sign: this.sign, properties: this.properties });
   }
 
   register() {
-    sendToWebsite({form: this.form, properties: this.properties});
+    sendToWebsite({ form: this.form, properties: this.properties });
   }
 
   changeProperty(index: number, value: PropertyData) {
@@ -37,7 +44,7 @@ class Current {
   setRegister(form: DynamicFormInput[]) {
     this.clear();
     this.form = form;
-    this.properties = form.map(input => ({
+    this.properties = form.map((input) => ({
       type: PropertyType.Raw,
       dataType: PropertyDataType.String,
       key: input.name,

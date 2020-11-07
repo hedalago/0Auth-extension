@@ -1,12 +1,19 @@
 import React from 'react';
+import { BrowserRouter, Switch, Link, Route, Redirect } from 'react-router-dom';
 
-import {LoginPage, SettingPage, RegisterPage, AuthPage, MainPage} from './components';
-import {BrowserRouter, Switch, Link, Route, Redirect} from "react-router-dom";
+import {
+  LoginPage,
+  SettingPage,
+  RegisterPage,
+  AuthPage,
+  MainPage,
+} from './components';
 
 export default function App() {
   const dummyData = {
     title: 'Naver',
-    favicon: 'https://s.pstatic.net/static/www/mobile/edit/2016/0705/mobile_212852414260.png',
+    favicon:
+      'https://s.pstatic.net/static/www/mobile/edit/2016/0705/mobile_212852414260.png',
     formInputs: [
       {
         type: 'text',
@@ -31,7 +38,7 @@ export default function App() {
         name: 'user-birth',
         label: 'Birth',
         required: true,
-      }
+      },
     ],
     reqInfos: [
       {
@@ -49,7 +56,7 @@ export default function App() {
       {
         label: 'Birth',
         required: true,
-      }
+      },
     ],
     currentInfos: [
       {
@@ -58,7 +65,7 @@ export default function App() {
       },
       {
         label: 'E-mail',
-        data: 'abcd@gmail.com'
+        data: 'abcd@gmail.com',
       },
       {
         label: 'Password',
@@ -67,26 +74,33 @@ export default function App() {
       {
         label: 'Birth',
         data: '2000-01-01',
-      }
+      },
     ],
-    signature: '048da7b63430eb4db203177baf2e8699a25116561624e67a31c2bf288d54216ce3f6f9c7b81fdbb5732342475a6ee5ccab883277ddbb38fdb79ab5424d401b844a',
+    signature:
+      '048da7b63430eb4db203177baf2e8699a25116561624e67a31c2bf288d54216ce3f6f9c7b81fdbb5732342475a6ee5ccab883277ddbb38fdb79ab5424d401b844a',
   };
 
   return (
     <BrowserRouter>
-      <Link to='/register'>register</Link>
-      <Link to='/auth'>auth</Link>
+      <Link to="/register">register</Link>
+      <Link to="/auth">auth</Link>
       <Switch>
-        <Route exact path='/main' render={() =>
-          <MainPage
-            currentInfos={dummyData.currentInfos}
-            signature={dummyData.signature}/>}/>
-        <Route path='/login' component={LoginPage}/>
-        <Route path='/settings' component={SettingPage}/>
-        <Route path='/register' component={RegisterPage}/>
-        <Route path='/auth' component={AuthPage}/>
-        <Redirect from='/' to='/main'/>
+        <Route
+          exact
+          path="/main"
+          render={() => (
+            <MainPage
+              currentInfos={dummyData.currentInfos}
+              signature={dummyData.signature}
+            />
+          )}
+        />
+        <Route path="/login" component={LoginPage} />
+        <Route path="/settings" component={SettingPage} />
+        <Route path="/register" component={RegisterPage} />
+        <Route path="/auth" component={AuthPage} />
+        <Redirect from="/" to="/main" />
       </Switch>
     </BrowserRouter>
   );
-};
+}

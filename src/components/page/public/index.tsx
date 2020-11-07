@@ -1,8 +1,8 @@
 import React from 'react';
-import {Container, makeStyles} from '@material-ui/core';
+import { Container, makeStyles } from '@material-ui/core';
 import { useHistory } from 'react-router-dom';
-import {currentStore} from "../../../stores";
-import {DynamicFormInput} from "@0auth/client";
+import { currentStore } from "../../../stores";
+import { DynamicFormInput } from "@0auth/client";
 
 type LayoutProps = {
   children: JSX.Element[] | JSX.Element;
@@ -22,7 +22,7 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-export default function Page({children}: LayoutProps) {
+export default function Page({ children }: LayoutProps) {
   const classes = useStyles();
   const history = useHistory();
   const register = (form: DynamicFormInput[]) => {
