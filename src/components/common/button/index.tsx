@@ -1,5 +1,5 @@
 import React from 'react';
-import {Button, makeStyles} from '@material-ui/core';
+import { Button, makeStyles } from '@material-ui/core';
 
 const useStyles = makeStyles(() => ({
   button: {
@@ -12,16 +12,16 @@ const useStyles = makeStyles(() => ({
     },
     fontFamily: ['"Noto Sans"', 'sans-serif'].join(','),
     fontWeight: 'bold',
-  }
-}))
+  },
+}));
 
 type ButtonProps = {
-  children: string,
-  icon?: JSX.Element,
-  onClick?: (event: React.MouseEvent<{}>) => void,
-}
+  children: string;
+  icon?: JSX.Element;
+  onClick?: (event: React.MouseEvent<{}>) => void;
+};
 
-export default function BaseButton({children, icon, onClick}: ButtonProps) {
+export default function BaseButton({ children, icon, onClick }: ButtonProps) {
   const classes = useStyles();
 
   return (
@@ -30,8 +30,9 @@ export default function BaseButton({children, icon, onClick}: ButtonProps) {
       variant="contained"
       size="large"
       endIcon={icon}
-      onClick={onClick}>
+      onClick={onClick}
+    >
       {children}
     </Button>
   );
-};
+}

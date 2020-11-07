@@ -1,1 +1,1 @@
-export {default as sendToWebsite} from './sendToWebsite';
+export { default as sendToWebsite } from './sendToWebsite';

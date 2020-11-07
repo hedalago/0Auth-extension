@@ -1,16 +1,10 @@
-import React, {useCallback} from 'react';
-import {
-  Box,
-  Button,
-  Chip,
-  Typography,
-  makeStyles
-} from '@material-ui/core';
+import React, { useCallback } from 'react';
+import { Box, Button, Chip, Typography, makeStyles } from '@material-ui/core';
+import { Property } from '@0auth/message';
 
-import {WebsiteInfo, BaseButton} from '../common';
-import {PrivatePage} from '../page';
-import {currentStore} from "../../stores";
-import {Property} from "@0auth/message";
+import { WebsiteInfo, BaseButton } from '../common';
+import { PrivatePage } from '../page';
+import { currentStore } from '../../stores';
 
 const useStyles = makeStyles(() => ({
   chipWrapper: {
@@ -46,7 +40,7 @@ const useStyles = makeStyles(() => ({
     marginBottom: 28,
     fontSize: 18,
     fontFamily: ['"Noto Sans"', 'sans-serif'].join(','),
-  }
+  },
 }));
 
 export default function AuthPage() {
@@ -58,33 +52,35 @@ export default function AuthPage() {
 
   return (
     <PrivatePage>
-      <WebsiteInfo title={currentStore.getTitle()} favicon={currentStore.getFavicon()} centered={true}/>
-      <Typography className={classes.text}>
-        requested information
-      </Typography>
+      <WebsiteInfo
+        title={currentStore.getTitle()}
+        favicon={currentStore.getFavicon()}
+        centered={true}
+      />
+      <Typography className={classes.text}>requested information</Typography>
       <Box className={classes.chipWrapper}>
         <div>
-          {
-            currentStore.properties.map((property: Property) => (
-              <Chip
-                className={classes.chip}
-                key={property.key}
-                label={`${property.key.toLowerCase()}*`}
-                variant='default'
-              />
-            ))
-          }
+          {currentStore.properties.map((property: Property) => (
+            <Chip
+              className={classes.chip}
+              key={property.key}
+              label={`${property.key.toLowerCase()}*`}
+              variant="default"
+            />
+          ))}
         </div>
       </Box>
       <Typography className={classes.text}>
         as above for authentication.
-        <br/>
+        <br />
         Would you like to approve?
       </Typography>
       <Box className={classes.buttonWrapper}>
-        <Button className={classes.button} variant="contained" size="large">Decline</Button>
+        <Button className={classes.button} variant="contained" size="large">
+          Decline
+        </Button>
         <BaseButton onClick={approveHandler}>Approve</BaseButton>
       </Box>
     </PrivatePage>
   );
-};
+}

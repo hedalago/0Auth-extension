@@ -3,15 +3,15 @@ import {
   Container,
   TextField,
   Typography,
-  makeStyles
+  makeStyles,
 } from '@material-ui/core';
 
-import {BaseButton} from '../common';
-import {Page} from "../page";
+import { BaseButton } from '../common';
+import { Page } from '../page';
 
 type SettingPageProps = {
   // TODO: Fill the setting page props
-}
+};
 
 const useStyles = makeStyles(() => ({
   container: {
@@ -43,14 +43,10 @@ export default function SettingPage() {
   return (
     <Page>
       <Container className={classes.container}>
-        <Typography className={classes.title}>
-          Password setting
-        </Typography>
-        <TextField className={classes.input} type="password" label="Password"/>
-        <BaseButton>
-          Save Password
-        </BaseButton>
+        <Typography className={classes.title}>Password setting</Typography>
+        <TextField className={classes.input} type="password" label="Password" />
+        <BaseButton>Save Password</BaseButton>
       </Container>
     </Page>
   );
-};
+}
