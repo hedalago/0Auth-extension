@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import {
   Box,
   Button,
@@ -12,23 +12,13 @@ import {
 } from '@material-ui/core';
 import FullscreenIcon from '@material-ui/icons/Fullscreen';
 import CloseIcon from '@material-ui/icons/Close';
-import { TransitionProps } from '@material-ui/core/transitions';
+import {TransitionProps} from '@material-ui/core/transitions';
 import MuiDialogTitle from '@material-ui/core/DialogTitle';
 
-import { PrivatePage } from '../page';
-import { HistoryListPage, CurrentLInfoPage, MembershipListPage } from '..';
-import { WebsiteInfo } from '../common';
-import { currentStore } from '../../stores';
-
-type CurrentInfo = {
-  label: string;
-  data: string | number;
-};
-
-type MainPageProps = {
-  currentInfos: Array<CurrentInfo>;
-  signature: string;
-};
+import {PrivatePage} from '../page';
+import {HistoryListPage, CurrentLInfoPage, MembershipListPage} from '..';
+import {WebsiteInfo} from '../common';
+import {currentStore} from '../../stores';
 
 type TabPanelProps = {
   children?: React.ReactNode;
@@ -85,7 +75,7 @@ const useStyles = makeStyles(() => ({
 }));
 
 function TabPanel(props: TabPanelProps) {
-  const { children, value, index, ...other } = props;
+  const {children, value, index, ...other} = props;
   const classes = useStyles();
 
   return (
@@ -118,7 +108,7 @@ type DialogHeaderProps = {
 };
 
 const DialogHeader = (props: DialogHeaderProps) => {
-  const { onClose } = props;
+  const {onClose} = props;
   const classes = useStyles();
 
   return (
@@ -129,7 +119,7 @@ const DialogHeader = (props: DialogHeaderProps) => {
           className={classes.closeButton}
           onClick={onClose}
         >
-          <CloseIcon />
+          <CloseIcon/>
         </IconButton>
       ) : null}
     </MuiDialogTitle>
@@ -143,110 +133,8 @@ const Transition = React.forwardRef(function Transition(
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-const dummyMemberships = [
-  {
-    title: 'Naver',
-    favicon:
-      'https://s.pstatic.net/static/www/mobile/edit/2016/0705/mobile_212852414260.png',
-    signature:
-      '048da7b63430eb4db203177baf2e8699a25116561624e67a31c2bf288d54216ce3f6f9c7b81fdbb5732342475a6ee5ccab883277ddbb38fdb79ab5424d401b844a',
-    infos: [
-      {
-        label: 'id',
-        data: 'abc1',
-      },
-      {
-        label: 'name',
-        data: 'aaa',
-      },
-      {
-        label: 'email',
-        data: 'abc@abcd.com',
-      },
-      {
-        label: 'birth',
-        data: '2020-01-01',
-      },
-    ],
-  },
-  {
-    title: 'Kakao',
-    favicon: 'https://t1.kakaocdn.net/kakaocorp/corp_thumbnail/Kakao.png',
-    signature:
-      '048da7b63430eb4db203177baf2e8699a25116561624e67a31c2bf288d54216ce3f6f9c7b81fdbb5732342475a6ee5ccab883277ddbb38fdb79ab5424d401b844a',
-    infos: [
-      {
-        label: 'id',
-        data: 'abc1',
-      },
-      {
-        label: 'name',
-        data: 'aaa',
-      },
-      {
-        label: 'email',
-        data: 'abc@abcd.com',
-      },
-      {
-        label: 'birth',
-        data: '2020-01-01',
-      },
-    ],
-  },
-  {
-    title: 'Google',
-    favicon:
-      'https://cdn4.iconfinder.com/data/icons/new-google-logo-2015/400/new-google-favicon-512.png',
-    signature:
-      '048da7b63430eb4db203177baf2e8699a25116561624e67a31c2bf288d54216ce3f6f9c7b81fdbb5732342475a6ee5ccab883277ddbb38fdb79ab5424d401b844a',
-    infos: [
-      {
-        label: 'id',
-        data: 'abc1',
-      },
-      {
-        label: 'name',
-        data: 'aaa',
-      },
-      {
-        label: 'email',
-        data: 'abc@abcd.com',
-      },
-      {
-        label: 'birth',
-        data: '2020-01-01',
-      },
-    ],
-  },
-  {
-    title: 'Facebook',
-    favicon: 'https://static.xx.fbcdn.net/rsrc.php/yo/r/iRmz9lCMBD2.ico',
-    signature:
-      '048da7b63430eb4db203177baf2e8699a25116561624e67a31c2bf288d54216ce3f6f9c7b81fdbb5732342475a6ee5ccab883277ddbb38fdb79ab5424d401b844a',
-    infos: [
-      {
-        label: 'id',
-        data: 'abc1',
-      },
-      {
-        label: 'name',
-        data: 'aaa',
-      },
-      {
-        label: 'email',
-        data: 'abc@abcd.com',
-      },
-      {
-        label: 'birth',
-        data: '2020-01-01',
-      },
-    ],
-  },
-];
-
-export default function MainPage({ currentInfos, signature }: MainPageProps) {
+export default function MainPage() {
   const classes = useStyles();
-
   const [value, setValue] = useState(0);
   const [open, setOpen] = useState(false);
 
@@ -270,7 +158,7 @@ export default function MainPage({ currentInfos, signature }: MainPageProps) {
           favicon={currentStore.getFavicon()}
           centered={true}
         />
-        <CurrentLInfoPage currentInfos={currentInfos} signature={signature} />
+        <CurrentLInfoPage/>
       </Box>
       <Box className={classes.bottomWrapper}>
         <Tabs
@@ -286,7 +174,7 @@ export default function MainPage({ currentInfos, signature }: MainPageProps) {
         <TabPanel value={value} index={0}>
           <Button
             className={classes.seeMore}
-            startIcon={<FullscreenIcon />}
+            startIcon={<FullscreenIcon/>}
             onClick={handleClickOpen}
           >
             Full Screen
@@ -297,15 +185,15 @@ export default function MainPage({ currentInfos, signature }: MainPageProps) {
             onClose={handleClose}
             TransitionComponent={Transition}
           >
-            <DialogHeader onClose={handleClose} />
-            <MembershipListPage memberships={dummyMemberships} />
+            <DialogHeader onClose={handleClose}/>
+            <MembershipListPage/>
           </Dialog>
-          <MembershipListPage memberships={dummyMemberships} />
+          <MembershipListPage/>
         </TabPanel>
         <TabPanel value={value} index={1}>
           <Button
             className={classes.seeMore}
-            startIcon={<FullscreenIcon />}
+            startIcon={<FullscreenIcon/>}
             onClick={handleClickOpen}
           >
             Full Screen
@@ -316,10 +204,10 @@ export default function MainPage({ currentInfos, signature }: MainPageProps) {
             onClose={handleClose}
             TransitionComponent={Transition}
           >
-            <DialogHeader onClose={handleClose} />
-            <HistoryListPage />
+            <DialogHeader onClose={handleClose}/>
+            <HistoryListPage/>
           </Dialog>
-          <HistoryListPage />
+          <HistoryListPage/>
         </TabPanel>
       </Box>
     </PrivatePage>

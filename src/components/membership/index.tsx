@@ -16,22 +16,7 @@ import {
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 
 import { WebsiteInfo } from '../common';
-
-type RegistrationInfo = {
-  label: string;
-  data: string | number;
-};
-
-type Membership = {
-  title: string;
-  favicon: string;
-  signature: string;
-  infos: Array<RegistrationInfo>;
-};
-
-type MembershipListPageProps = {
-  memberships: Array<Membership>;
-};
+import {propertyStore} from "../../stores";
 
 const useStyles = makeStyles(() => ({
   wrapper: {
@@ -67,11 +52,9 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-export default function MembershipListPage({
-  memberships,
-}: MembershipListPageProps) {
+export default function MembershipListPage() {
   const classes = useStyles();
-  const [openId, setOpenId] = useState<string | null>(null);
+  const [openHost, setOpenHost] = useState<string | null>(null);
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
 
   const handlePopoverOpen = (
@@ -85,11 +68,11 @@ export default function MembershipListPage({
   };
 
   const handleClickOpen = (id: string) => {
-    setOpenId(id);
+    setOpenHost(id);
   };
 
   const handleClose = () => {
-    setOpenId(null);
+    setOpenHost(null);
   };
 
   const popoverOpen = Boolean(anchorEl);
@@ -97,19 +80,18 @@ export default function MembershipListPage({
   return (
     <Box className={classes.wrapper}>
       <List component="nav">
-        {memberships.map((membership, index) => {
-          const id = `${index}-${membership.title}`;
+        {propertyStore.hostList.map((host) => {
           return (
-            <span key={membership.title}>
+            <span key={propertyStore.properties[host].title}>
               <ListItem
                 className={classes.listItem}
                 button
                 divider
-                onClick={() => handleClickOpen(id)}
+                onClick={() => handleClickOpen(host)}
               >
                 <WebsiteInfo
-                  title={membership.title}
-                  favicon={membership.favicon}
+                  title={propertyStore.properties[host].title}
+                  favicon={propertyStore.properties[host].favicon}
                 />
                 <ListItemIcon>
                   <ChevronRightIcon />
@@ -117,7 +99,7 @@ export default function MembershipListPage({
               </ListItem>
               <Dialog
                 keepMounted
-                open={id === openId}
+                open={host === openHost}
                 onClose={handleClose}
                 classes={{ paper: classes.dialog }}
                 style={{ backgroundColor: 'transparent' }}
@@ -127,26 +109,26 @@ export default function MembershipListPage({
                   },
                 }}
               >
-                <DialogTitle id={`${membership.title}-dialog-title`}>
-                  {membership.title}
+                <DialogTitle id={`${propertyStore.properties[host].title}-dialog-title`}>
+                  {propertyStore.properties[host].title}
                 </DialogTitle>
                 <DialogContent>
-                  {membership.infos.map((i) => {
+                  {propertyStore.properties[host].property.map((property) => {
                     return (
-                      <Typography key={i.label} className={classes.text}>
-                        {i.label.toLowerCase()} : {i.data}
+                      <Typography key={property.key} className={classes.text}>
+                        {property.key.toLowerCase()} : {property.value}
                       </Typography>
                     );
                   })}
                   <Typography
                     className={classes.text}
-                    aria-owns={id === openId ? 'mouse-over-popover' : undefined}
+                    aria-owns={host === openHost ? 'mouse-over-popover' : undefined}
                     aria-haspopup="true"
                     onMouseEnter={handlePopoverOpen}
                     onMouseLeave={handlePopoverClose}
                     noWrap
                   >
-                    sign : 0x{membership.signature}
+                    sign : 0x{propertyStore.properties[host].sign.value}
                   </Typography>
                   <Popover
                     id="mouse-over-popover"
@@ -165,7 +147,7 @@ export default function MembershipListPage({
                     disableRestoreFocus
                   >
                     <Typography className={classes.popoverText}>
-                      0x{membership.signature}
+                      0x{propertyStore.properties[host].sign.value}
                     </Typography>
                   </Popover>
                 </DialogContent>

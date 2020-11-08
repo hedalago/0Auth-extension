@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import {
   Container,
   Box,
@@ -6,16 +6,7 @@ import {
   Popover,
   makeStyles,
 } from '@material-ui/core';
-
-type CurrentInfo = {
-  label: string;
-  data: string | number;
-};
-
-type CurrentInfoPageProps = {
-  currentInfos: Array<CurrentInfo>;
-  signature: string;
-};
+import {currentStore} from "../../stores";
 
 const useStyles = makeStyles(() => ({
   container: {
@@ -43,10 +34,7 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-export default function CurrentInfoPage({
-  currentInfos,
-  signature,
-}: CurrentInfoPageProps) {
+export default function CurrentInfoPage() {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
 
@@ -65,13 +53,11 @@ export default function CurrentInfoPage({
   return (
     <Container className={classes.container}>
       <Typography className={classes.title}>Current page info</Typography>
-      {currentInfos.map((i) => {
-        return (
-          <Typography className={classes.text}>
-            {i.label.toLowerCase()} : {i.data}
-          </Typography>
-        );
-      })}
+      {currentStore.properties.map((property) => (
+        <Typography className={classes.text}>
+          {property.key.toLowerCase()} : {property.value}
+        </Typography>
+      ))}
       <Box>
         <Typography
           className={classes.text}
@@ -81,7 +67,7 @@ export default function CurrentInfoPage({
           onMouseLeave={handlePopoverClose}
           noWrap
         >
-          sign : 0x{signature}
+          sign : 0x{currentStore.sign?.value}
         </Typography>
         <Popover
           id="mouse-over-popover"
@@ -99,7 +85,7 @@ export default function CurrentInfoPage({
           onClose={handlePopoverClose}
           disableRestoreFocus
         >
-          <Typography className={classes.popoverText}>0x{signature}</Typography>
+          <Typography className={classes.popoverText}>0x{currentStore.sign?.value}</Typography>
         </Popover>
       </Box>
     </Container>

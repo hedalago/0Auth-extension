@@ -9,10 +9,6 @@ import {
 import { BaseButton } from '../common';
 import { Page } from '../page';
 
-type SettingPageProps = {
-  // TODO: Fill the setting page props
-};
-
 const useStyles = makeStyles(() => ({
   container: {
     width: '100%',
