@@ -244,44 +244,6 @@ const dummyMemberships = [
   },
 ];
 
-const dummyHistoryLogs = [
-  {
-    type: 'AUTHENTICATION',
-    createdAt: '2020-09-01',
-    origin: 'https://www.naver.com',
-  },
-  {
-    type: 'REGISTRATION',
-    createdAt: '2020-08-31',
-    origin: 'https://www.naver.com',
-  },
-  {
-    type: 'AUTHENTICATION',
-    createdAt: '2020-07-01',
-    origin: 'https://www.kakaocorp.com',
-  },
-  {
-    type: 'REGISTRATION',
-    createdAt: '2020-07-01',
-    origin: 'https://www.kakaocorp.com',
-  },
-  {
-    type: 'AUTHENTICATION',
-    createdAt: '2020-05-01',
-    origin: 'https://www.facebook.com',
-  },
-  {
-    type: 'REGISTRATION',
-    createdAt: '2020-05-01',
-    origin: 'https://www.facebook.com',
-  },
-  {
-    type: 'AUTHENTICATION',
-    createdAt: '2020-01-01',
-    origin: 'https://www.google.com',
-  },
-];
-
 export default function MainPage({ currentInfos, signature }: MainPageProps) {
   const classes = useStyles();
 
@@ -355,9 +317,9 @@ export default function MainPage({ currentInfos, signature }: MainPageProps) {
             TransitionComponent={Transition}
           >
             <DialogHeader onClose={handleClose} />
-            <HistoryListPage histories={dummyHistoryLogs} />
+            <HistoryListPage />
           </Dialog>
-          <HistoryListPage histories={dummyHistoryLogs} />
+          <HistoryListPage />
         </TabPanel>
       </Box>
     </PrivatePage>

@@ -13,6 +13,7 @@ import { sendToWebsite } from '../../extension';
 import { propertyStore } from '../index';
 
 class Current {
+  host: string | undefined = undefined;
   title: string | undefined = undefined;
   favicon: string | undefined = undefined;
   sign: Signature | undefined = undefined;
@@ -37,8 +38,8 @@ class Current {
 
   setAuth(host: string) {
     this.clear();
-    this.properties = propertyStore.properties[host];
-    this.sign = propertyStore.sign[host];
+    this.properties = propertyStore.properties[host].property;
+    this.sign = propertyStore.properties[host].sign;
   }
 
   setRegister(form: DynamicFormInput[]) {

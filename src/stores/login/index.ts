@@ -30,8 +30,7 @@ class Login {
     this.isLogin = true;
     this.hash = hash(this.password);
     const key = hash(`${this.password}${this.hash}`);
-    propertyStore.storeKey(key);
-    propertyStore.setKey(key);
+    propertyStore.init(key);
     if (chrome.storage !== undefined) {
       chrome.storage.local.set({ hash: this.hash });
     }
@@ -44,7 +43,7 @@ class Login {
     }
     if (hash(this.password) === this.hash) {
       this.isLogin = true;
-      propertyStore.setKey(hash(this.password + this.hash));
+      propertyStore.init(hash(this.password + this.hash));
       return true;
     }
     return false;

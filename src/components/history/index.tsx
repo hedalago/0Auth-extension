@@ -9,22 +9,13 @@ import {
 } from '@material-ui/core';
 import HowToRegIcon from '@material-ui/icons/HowToReg';
 import VpnKeyIcon from '@material-ui/icons/VpnKey';
+import {currentStore, historyStore} from "../../stores";
 
-type History = {
-  type: string;
-  createdAt: string;
-  origin: string;
-};
-
-type HistoryListPageProps = {
-  histories: Array<History>;
-};
-
-export default function HistoryListPage({ histories }: HistoryListPageProps) {
+export default function HistoryListPage() {
   return (
     <Box>
       <List>
-        {histories.map((history) => {
+        {historyStore.history(currentStore.host).map((history) => {
           return (
             <ListItem divider>
               <ListItemAvatar>
@@ -39,7 +30,7 @@ export default function HistoryListPage({ histories }: HistoryListPageProps) {
               <ListItemText
                 primary={history.type}
                 secondary={`${new Date(history.createdAt).toDateString()}  ${
-                  history.origin
+                  history.host
                 }`}
               />
             </ListItem>
