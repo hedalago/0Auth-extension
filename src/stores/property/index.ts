@@ -70,6 +70,7 @@ class UserProperty {
     this.properties[host].favicon = favicon;
     this.properties[host].property = properties;
     this.properties[host].sign = sign;
+    this.storeProperty(host);
   }
 }
 

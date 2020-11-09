@@ -5,6 +5,7 @@ import { defaultValue } from '@0auth/message/lib/type/defaultValue';
 import { BaseButton, WebsiteInfo } from '../common';
 import { PrivatePage } from '../page';
 import { currentStore } from '../../stores';
+import { useHistory } from 'react-router-dom';
 
 const useStyles = makeStyles(() => ({
   form: {
@@ -29,9 +30,11 @@ const useStyles = makeStyles(() => ({
 
 export default function RegisterPage() {
   const classes = useStyles();
+  const history = useHistory();
   const submitHandler = useCallback((e: React.MouseEvent<{}, MouseEvent>) => {
     e.preventDefault();
     currentStore.register();
+    window.close();
   }, []);
 
   return (

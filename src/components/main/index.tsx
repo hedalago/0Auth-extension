@@ -158,7 +158,9 @@ export default function MainPage() {
           favicon={currentStore.getFavicon()}
           centered={true}
         />
-        <CurrentLInfoPage/>
+        {
+          currentStore.host !== undefined ? <CurrentLInfoPage/> : ''
+        }
       </Box>
       <Box className={classes.bottomWrapper}>
         <Tabs
