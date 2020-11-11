@@ -21,7 +21,11 @@ type ButtonProps = {
   onClick?: (event: React.MouseEvent<{}>) => void;
 };
 
-export default function BaseButton({ children, icon, onClick }: ButtonProps) {
+export default function BaseButton({
+  children,
+  icon,
+  onClick,
+}: ButtonProps): JSX.Element {
   const classes = useStyles();
 
   return (

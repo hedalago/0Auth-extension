@@ -2,10 +2,10 @@
 # yarn lockfile v1
 
 
-"@0auth/client@^1.0.12":
-  version "1.0.12"
-  resolved "https://registry.yarnpkg.com/@0auth/client/-/client-1.0.12.tgz#fc87606ffd36a93f4fdfc3ad55ce6b63a28d638d"
-  integrity sha512-nL1go+1knCvsy6j8D6CNv1w3IJjtassOZD78yURNw9kizehyJkdzLmBRE/y/+0OVDKOuseUwuIO/cuHAugtqPg==
+"@0auth/client@^1.0.13":
+  version "1.0.13"
+  resolved "https://registry.yarnpkg.com/@0auth/client/-/client-1.0.13.tgz#9b6fe4376a3557dd4f4125495522fdd1e43398ec"
+  integrity sha512-4R+mP7tYD9IDVmWlbJY3UEia6YtWn/4T6JHOPjaDLfmOjnYwNVi+zg/M41Y4BliuNh3s6HiIZCK7gF1BLduipg==
   dependencies:
     "@0auth/message" "^1.0.8"
     axios "^0.19.2"

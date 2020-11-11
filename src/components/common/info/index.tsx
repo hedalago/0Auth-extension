@@ -28,7 +28,7 @@ export default function WebsiteInfo({
   title,
   favicon,
   centered,
-}: WebsiteInfoProps) {
+}: WebsiteInfoProps): JSX.Element {
   const classes = useStyles();
 
   return (

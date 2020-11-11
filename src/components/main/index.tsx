@@ -20,16 +20,6 @@ import { HistoryListPage, CurrentLInfoPage, MembershipListPage } from '..';
 import { WebsiteInfo } from '../common';
 import { currentStore } from '../../stores';
 
-type CurrentInfo = {
-  label: string;
-  data: string | number;
-};
-
-type MainPageProps = {
-  currentInfos: Array<CurrentInfo>;
-  signature: string;
-};
-
 type TabPanelProps = {
   children?: React.ReactNode;
   index: number;
@@ -143,148 +133,8 @@ const Transition = React.forwardRef(function Transition(
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-const dummyMemberships = [
-  {
-    title: 'Naver',
-    favicon:
-      'https://s.pstatic.net/static/www/mobile/edit/2016/0705/mobile_212852414260.png',
-    signature:
-      '048da7b63430eb4db203177baf2e8699a25116561624e67a31c2bf288d54216ce3f6f9c7b81fdbb5732342475a6ee5ccab883277ddbb38fdb79ab5424d401b844a',
-    infos: [
-      {
-        label: 'id',
-        data: 'abc1',
-      },
-      {
-        label: 'name',
-        data: 'aaa',
-      },
-      {
-        label: 'email',
-        data: 'abc@abcd.com',
-      },
-      {
-        label: 'birth',
-        data: '2020-01-01',
-      },
-    ],
-  },
-  {
-    title: 'Kakao',
-    favicon: 'https://t1.kakaocdn.net/kakaocorp/corp_thumbnail/Kakao.png',
-    signature:
-      '048da7b63430eb4db203177baf2e8699a25116561624e67a31c2bf288d54216ce3f6f9c7b81fdbb5732342475a6ee5ccab883277ddbb38fdb79ab5424d401b844a',
-    infos: [
-      {
-        label: 'id',
-        data: 'abc1',
-      },
-      {
-        label: 'name',
-        data: 'aaa',
-      },
-      {
-        label: 'email',
-        data: 'abc@abcd.com',
-      },
-      {
-        label: 'birth',
-        data: '2020-01-01',
-      },
-    ],
-  },
-  {
-    title: 'Google',
-    favicon:
-      'https://cdn4.iconfinder.com/data/icons/new-google-logo-2015/400/new-google-favicon-512.png',
-    signature:
-      '048da7b63430eb4db203177baf2e8699a25116561624e67a31c2bf288d54216ce3f6f9c7b81fdbb5732342475a6ee5ccab883277ddbb38fdb79ab5424d401b844a',
-    infos: [
-      {
-        label: 'id',
-        data: 'abc1',
-      },
-      {
-        label: 'name',
-        data: 'aaa',
-      },
-      {
-        label: 'email',
-        data: 'abc@abcd.com',
-      },
-      {
-        label: 'birth',
-        data: '2020-01-01',
-      },
-    ],
-  },
-  {
-    title: 'Facebook',
-    favicon: 'https://static.xx.fbcdn.net/rsrc.php/yo/r/iRmz9lCMBD2.ico',
-    signature:
-      '048da7b63430eb4db203177baf2e8699a25116561624e67a31c2bf288d54216ce3f6f9c7b81fdbb5732342475a6ee5ccab883277ddbb38fdb79ab5424d401b844a',
-    infos: [
-      {
-        label: 'id',
-        data: 'abc1',
-      },
-      {
-        label: 'name',
-        data: 'aaa',
-      },
-      {
-        label: 'email',
-        data: 'abc@abcd.com',
-      },
-      {
-        label: 'birth',
-        data: '2020-01-01',
-      },
-    ],
-  },
-];
-
-const dummyHistoryLogs = [
-  {
-    type: 'AUTHENTICATION',
-    createdAt: '2020-09-01',
-    origin: 'https://www.naver.com',
-  },
-  {
-    type: 'REGISTRATION',
-    createdAt: '2020-08-31',
-    origin: 'https://www.naver.com',
-  },
-  {
-    type: 'AUTHENTICATION',
-    createdAt: '2020-07-01',
-    origin: 'https://www.kakaocorp.com',
-  },
-  {
-    type: 'REGISTRATION',
-    createdAt: '2020-07-01',
-    origin: 'https://www.kakaocorp.com',
-  },
-  {
-    type: 'AUTHENTICATION',
-    createdAt: '2020-05-01',
-    origin: 'https://www.facebook.com',
-  },
-  {
-    type: 'REGISTRATION',
-    createdAt: '2020-05-01',
-    origin: 'https://www.facebook.com',
-  },
-  {
-    type: 'AUTHENTICATION',
-    createdAt: '2020-01-01',
-    origin: 'https://www.google.com',
-  },
-];
-
-export default function MainPage({ currentInfos, signature }: MainPageProps) {
+export default function MainPage(): JSX.Element {
   const classes = useStyles();
-
   const [value, setValue] = useState(0);
   const [open, setOpen] = useState(false);
 
@@ -306,9 +156,9 @@ export default function MainPage({ currentInfos, signature }: MainPageProps) {
         <WebsiteInfo
           title={currentStore.getTitle()}
           favicon={currentStore.getFavicon()}
-          centered={true}
+          centered
         />
-        <CurrentLInfoPage currentInfos={currentInfos} signature={signature} />
+        {currentStore.host !== undefined ? <CurrentLInfoPage /> : ''}
       </Box>
       <Box className={classes.bottomWrapper}>
         <Tabs
@@ -336,9 +186,9 @@ export default function MainPage({ currentInfos, signature }: MainPageProps) {
             TransitionComponent={Transition}
           >
             <DialogHeader onClose={handleClose} />
-            <MembershipListPage memberships={dummyMemberships} />
+            <MembershipListPage />
           </Dialog>
-          <MembershipListPage memberships={dummyMemberships} />
+          <MembershipListPage />
         </TabPanel>
         <TabPanel value={value} index={1}>
           <Button
@@ -355,9 +205,9 @@ export default function MainPage({ currentInfos, signature }: MainPageProps) {
             TransitionComponent={Transition}
           >
             <DialogHeader onClose={handleClose} />
-            <HistoryListPage histories={dummyHistoryLogs} />
+            <HistoryListPage />
           </Dialog>
-          <HistoryListPage histories={dummyHistoryLogs} />
+          <HistoryListPage />
         </TabPanel>
       </Box>
     </PrivatePage>

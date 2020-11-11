@@ -2,66 +2,90 @@ import { makeAutoObservable } from 'mobx';
 import { Property, Signature } from '@0auth/message';
 import { decryptMessage, encryptMessage } from '@0auth/client/lib/utils';
 
+type PropertyInfo = {
+  host: string;
+  title: string;
+  favicon: string;
+  property: Property[];
+  sign: Signature;
+};
+
 class UserProperty {
-  isStored: boolean = false;
-  encryptedData: string = '';
-  properties: { [host: string]: Property[] } = {};
-  sign: { [host: string]: Signature } = {};
-  key: string = '';
+  hostList: string[] = [];
+
+  properties: { [host: string]: PropertyInfo } = {};
+
+  key = '';
 
   constructor() {
     makeAutoObservable(this);
-    this.init();
   }
 
-  init() {
+  init(key: string) {
+    this.setKey(key);
     if (chrome.storage === undefined) {
       return;
     }
-    chrome.storage.local.get(['encrypt'], async (data) => {
-      const encryptedData = data.encrypt;
-      if (encryptedData === undefined) {
+    chrome.storage.local.get(['hostList'], async (data) => {
+      const hostList = JSON.parse(decryptMessage(data.hostList, this.key));
+      if (hostList === undefined) {
         return;
       }
-      this.isStored = true;
-      this.encryptedData = encryptedData;
+      this.hostList = hostList;
+      this.loadAll();
     });
   }
 
-  storeKey(key: string) {
-    if (chrome.storage === undefined) {
-      return;
-    }
-    chrome.storage.local.set({ key: key }, () =>
-      console.log('키가 저장되었습니다.'),
-    );
+  loadAll() {
+    chrome.storage.local.get(this.hostList, async (data) => {
+      for (const host of this.hostList) {
+        if (data[host] !== undefined) {
+          this.properties[host] = JSON.parse(
+            decryptMessage(data[host], this.key),
+          );
+        }
+      }
+    });
+  }
+
+  loadProperty(host: string) {
+    chrome.storage.local.get([host], async (data) => {
+      const encryptedData = data[host];
+      if (encryptedData !== undefined) {
+        this.properties[host] = JSON.parse(
+          decryptMessage(data[host], this.key),
+        );
+      }
+    });
   }
 
   setKey(key: string) {
     this.key = key;
   }
 
-  loadProperties() {
-    const data = JSON.parse(decryptMessage(this.encryptedData, this.key));
-    this.properties = data.properties;
-    this.sign = data.sign;
-  }
-
-  updateStorage() {
-    this.encryptedData = encryptMessage(
-      JSON.stringify({ properties: this.properties, sign: this.sign }),
-      this.key,
-    );
+  storeProperty(host: string) {
     if (chrome.storage === undefined) {
       return;
     }
-    chrome.storage.local.set({ encrypt: this.encryptedData }, () =>
-      console.log('기록되었습니다.'),
+    const encryptedData = encryptMessage(
+      JSON.stringify(this.properties[host]),
+      this.key,
     );
+    chrome.storage.local.set({ [host]: encryptedData });
   }
 
-  updateProperties(host: string, properties: Property[]) {
-    this.properties[host] = properties;
+  updateProperties(
+    host: string,
+    title: string,
+    favicon: string,
+    properties: Property[],
+    sign: Signature,
+  ) {
+    this.properties[host].title = title;
+    this.properties[host].favicon = favicon;
+    this.properties[host].property = properties;
+    this.properties[host].sign = sign;
+    this.storeProperty(host);
   }
 }
 

@@ -43,7 +43,7 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-export default function AuthPage() {
+export default function AuthPage(): JSX.Element {
   const classes = useStyles();
   const approveHandler = useCallback((e: React.MouseEvent<{}, MouseEvent>) => {
     e.preventDefault();
@@ -55,7 +55,7 @@ export default function AuthPage() {
       <WebsiteInfo
         title={currentStore.getTitle()}
         favicon={currentStore.getFavicon()}
-        centered={true}
+        centered
       />
       <Typography className={classes.text}>requested information</Typography>
       <Box className={classes.chipWrapper}>

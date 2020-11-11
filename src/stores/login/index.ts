@@ -4,9 +4,11 @@ import { hash } from '@0auth/message';
 import { propertyStore } from '../index';
 
 class Login {
-  isLogin: boolean = false;
-  password: string = '';
-  hash: string = '';
+  isLogin = false;
+
+  password = '';
+
+  hash = '';
 
   constructor() {
     makeAutoObservable(this);
@@ -18,11 +20,11 @@ class Login {
       return;
     }
     chrome.storage.local.get('hash', async (data) => {
-      const hash = data.hash;
-      if (hash === undefined) {
+      const hashValue = data.hash;
+      if (hashValue === undefined) {
         return;
       }
-      this.hash = hash;
+      this.hash = hashValue;
     });
   }
 
@@ -30,8 +32,7 @@ class Login {
     this.isLogin = true;
     this.hash = hash(this.password);
     const key = hash(`${this.password}${this.hash}`);
-    propertyStore.storeKey(key);
-    propertyStore.setKey(key);
+    propertyStore.init(key);
     if (chrome.storage !== undefined) {
       chrome.storage.local.set({ hash: this.hash });
     }
@@ -44,7 +45,7 @@ class Login {
     }
     if (hash(this.password) === this.hash) {
       this.isLogin = true;
-      propertyStore.setKey(hash(this.password + this.hash));
+      propertyStore.init(hash(this.password + this.hash));
       return true;
     }
     return false;

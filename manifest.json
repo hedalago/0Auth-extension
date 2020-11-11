@@ -2,7 +2,7 @@
   "name": "0Auth Extension",
   "version": "1.0",
   "description": "Chrome Extension for 0Auth",
-  "permissions": ["activeTab", "declarativeContent", "storage"],
+  "permissions": ["activeTab", "declarativeContent", "storage", "unlimitedStorage"],
   "browser_action": {
     "default_popup": "build/index.html",
     "default_title": "0Auth",

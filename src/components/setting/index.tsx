@@ -9,10 +9,6 @@ import {
 import { BaseButton } from '../common';
 import { Page } from '../page';
 
-type SettingPageProps = {
-  // TODO: Fill the setting page props
-};
-
 const useStyles = makeStyles(() => ({
   container: {
     width: '100%',
@@ -37,7 +33,7 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-export default function SettingPage() {
+export default function SettingPage(): JSX.Element {
   const classes = useStyles();
 
   return (
