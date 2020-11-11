@@ -33,7 +33,7 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-export default function SettingPage() {
+export default function SettingPage(): JSX.Element {
   const classes = useStyles();
 
   return (

@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import {
   Container,
   Box,
@@ -6,7 +6,7 @@ import {
   Popover,
   makeStyles,
 } from '@material-ui/core';
-import {currentStore} from "../../stores";
+import { currentStore } from '../../stores';
 
 const useStyles = makeStyles(() => ({
   container: {
@@ -34,7 +34,7 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-export default function CurrentInfoPage() {
+export default function CurrentInfoPage(): JSX.Element {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
 
@@ -55,7 +55,8 @@ export default function CurrentInfoPage() {
       <Typography className={classes.title}>Current page info</Typography>
       {currentStore.properties.map((property) => (
         <Typography className={classes.text}>
-          {property.key.toLowerCase()} : {property.value}
+          {property.key.toLowerCase()} :
+{property.value}
         </Typography>
       ))}
       <Box>
@@ -67,7 +68,8 @@ export default function CurrentInfoPage() {
           onMouseLeave={handlePopoverClose}
           noWrap
         >
-          sign : 0x{currentStore.sign?.value}
+          sign : 0x
+          {currentStore.sign?.value}
         </Typography>
         <Popover
           id="mouse-over-popover"
@@ -85,7 +87,10 @@ export default function CurrentInfoPage() {
           onClose={handlePopoverClose}
           disableRestoreFocus
         >
-          <Typography className={classes.popoverText}>0x{currentStore.sign?.value}</Typography>
+          <Typography className={classes.popoverText}>
+            0x
+            {currentStore.sign?.value}
+          </Typography>
         </Popover>
       </Box>
     </Container>

@@ -2,10 +2,10 @@ import React, { useCallback } from 'react';
 import { TextField, Box, makeStyles } from '@material-ui/core';
 import { defaultValue } from '@0auth/message/lib/type/defaultValue';
 
+import { useHistory } from 'react-router-dom';
 import { BaseButton, WebsiteInfo } from '../common';
 import { PrivatePage } from '../page';
 import { currentStore } from '../../stores';
-import { useHistory } from 'react-router-dom';
 
 const useStyles = makeStyles(() => ({
   form: {
@@ -28,7 +28,7 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-export default function RegisterPage() {
+export default function RegisterPage(): JSX.Element {
   const classes = useStyles();
   const history = useHistory();
   const submitHandler = useCallback((e: React.MouseEvent<{}, MouseEvent>) => {
@@ -42,7 +42,7 @@ export default function RegisterPage() {
       <WebsiteInfo
         title={currentStore.getTitle()}
         favicon={currentStore.getFavicon()}
-        centered={true}
+        centered
       />
       <form className={classes.form}>
         {currentStore.form.map((currentInput, i) => {
@@ -57,7 +57,7 @@ export default function RegisterPage() {
                 name={name}
                 placeholder={label}
                 onChange={(e) => currentStore.changeProperty(i, e.target.value)}
-                required={true}
+                required
               />
             </Box>
           );

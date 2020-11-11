@@ -8,7 +8,12 @@ type MessageType = {
   form?: DynamicFormInput[];
 };
 
-export default function sendToWebsite({ type, properties, sign, form }: MessageType) {
+export default function sendToWebsite({
+  type,
+  properties,
+  sign,
+  form,
+}: MessageType): void {
   if (chrome.tabs !== undefined) {
     chrome.tabs.query({ currentWindow: true, active: true }, (tabs) => {
       const activeTab = tabs[0];

@@ -16,7 +16,7 @@ import {
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 
 import { WebsiteInfo } from '../common';
-import {propertyStore} from "../../stores";
+import { propertyStore } from '../../stores';
 
 const useStyles = makeStyles(() => ({
   wrapper: {
@@ -52,7 +52,7 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-export default function MembershipListPage() {
+export default function MembershipListPage(): JSX.Element {
   const classes = useStyles();
   const [openHost, setOpenHost] = useState<string | null>(null);
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
@@ -109,26 +109,32 @@ export default function MembershipListPage() {
                   },
                 }}
               >
-                <DialogTitle id={`${propertyStore.properties[host].title}-dialog-title`}>
+                <DialogTitle
+                  id={`${propertyStore.properties[host].title}-dialog-title`}
+                >
                   {propertyStore.properties[host].title}
                 </DialogTitle>
                 <DialogContent>
                   {propertyStore.properties[host].property.map((property) => {
                     return (
                       <Typography key={property.key} className={classes.text}>
-                        {property.key.toLowerCase()} : {property.value}
+                        {property.key.toLowerCase()} :
+{property.value}
                       </Typography>
                     );
                   })}
                   <Typography
                     className={classes.text}
-                    aria-owns={host === openHost ? 'mouse-over-popover' : undefined}
+                    aria-owns={
+                      host === openHost ? 'mouse-over-popover' : undefined
+                    }
                     aria-haspopup="true"
                     onMouseEnter={handlePopoverOpen}
                     onMouseLeave={handlePopoverClose}
                     noWrap
                   >
-                    sign : 0x{propertyStore.properties[host].sign.value}
+                    sign : 0x
+                    {propertyStore.properties[host].sign.value}
                   </Typography>
                   <Popover
                     id="mouse-over-popover"
@@ -147,7 +153,8 @@ export default function MembershipListPage() {
                     disableRestoreFocus
                   >
                     <Typography className={classes.popoverText}>
-                      0x{propertyStore.properties[host].sign.value}
+                      0x
+                      {propertyStore.properties[host].sign.value}
                     </Typography>
                   </Popover>
                 </DialogContent>

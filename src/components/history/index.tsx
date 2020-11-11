@@ -9,9 +9,9 @@ import {
 } from '@material-ui/core';
 import HowToRegIcon from '@material-ui/icons/HowToReg';
 import VpnKeyIcon from '@material-ui/icons/VpnKey';
-import {currentStore, historyStore} from "../../stores";
+import { currentStore, historyStore } from '../../stores';
 
-export default function HistoryListPage() {
+export default function HistoryListPage(): JSX.Element {
   return (
     <Box>
       <List>

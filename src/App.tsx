@@ -9,11 +9,11 @@ import {
   MainPage,
 } from './components';
 
-export default function App() {
+export default function App(): JSX.Element {
   return (
     <BrowserRouter>
       <Switch>
-        <Route exact path="/main" component={MainPage}/>
+        <Route exact path="/main" component={MainPage} />
         <Route path="/login" component={LoginPage} />
         <Route path="/settings" component={SettingPage} />
         <Route path="/register" component={RegisterPage} />

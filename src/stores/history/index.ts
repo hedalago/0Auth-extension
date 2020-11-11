@@ -1,10 +1,10 @@
-import {makeAutoObservable} from 'mobx';
+import { makeAutoObservable } from 'mobx';
 
 type HistoryInfo = {
   host: string;
   type: string;
   createdAt: Date;
-}
+};
 
 class History {
   histories: { [host: string]: HistoryInfo[] } = {};
@@ -16,7 +16,7 @@ class History {
     }
     chrome.storage.local.get(['history'], async (data) => {
       if (data.history === undefined) {
-        return ;
+        return;
       }
       this.histories = data.history;
     });
@@ -29,9 +29,11 @@ class History {
     this.histories[host].push({
       host,
       type,
-      createdAt: new Date()
-    })
-    chrome.storage.local.set({ history: JSON.parse(JSON.stringify(this.histories)) });
+      createdAt: new Date(),
+    });
+    chrome.storage.local.set({
+      history: JSON.parse(JSON.stringify(this.histories)),
+    });
   }
 
   history(host: string | undefined): HistoryInfo[] {

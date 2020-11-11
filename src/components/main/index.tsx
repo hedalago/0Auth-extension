@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import {
   Box,
   Button,
@@ -12,13 +12,13 @@ import {
 } from '@material-ui/core';
 import FullscreenIcon from '@material-ui/icons/Fullscreen';
 import CloseIcon from '@material-ui/icons/Close';
-import {TransitionProps} from '@material-ui/core/transitions';
+import { TransitionProps } from '@material-ui/core/transitions';
 import MuiDialogTitle from '@material-ui/core/DialogTitle';
 
-import {PrivatePage} from '../page';
-import {HistoryListPage, CurrentLInfoPage, MembershipListPage} from '..';
-import {WebsiteInfo} from '../common';
-import {currentStore} from '../../stores';
+import { PrivatePage } from '../page';
+import { HistoryListPage, CurrentLInfoPage, MembershipListPage } from '..';
+import { WebsiteInfo } from '../common';
+import { currentStore } from '../../stores';
 
 type TabPanelProps = {
   children?: React.ReactNode;
@@ -75,7 +75,7 @@ const useStyles = makeStyles(() => ({
 }));
 
 function TabPanel(props: TabPanelProps) {
-  const {children, value, index, ...other} = props;
+  const { children, value, index, ...other } = props;
   const classes = useStyles();
 
   return (
@@ -108,7 +108,7 @@ type DialogHeaderProps = {
 };
 
 const DialogHeader = (props: DialogHeaderProps) => {
-  const {onClose} = props;
+  const { onClose } = props;
   const classes = useStyles();
 
   return (
@@ -119,7 +119,7 @@ const DialogHeader = (props: DialogHeaderProps) => {
           className={classes.closeButton}
           onClick={onClose}
         >
-          <CloseIcon/>
+          <CloseIcon />
         </IconButton>
       ) : null}
     </MuiDialogTitle>
@@ -133,7 +133,7 @@ const Transition = React.forwardRef(function Transition(
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-export default function MainPage() {
+export default function MainPage(): JSX.Element {
   const classes = useStyles();
   const [value, setValue] = useState(0);
   const [open, setOpen] = useState(false);
@@ -156,11 +156,9 @@ export default function MainPage() {
         <WebsiteInfo
           title={currentStore.getTitle()}
           favicon={currentStore.getFavicon()}
-          centered={true}
+          centered
         />
-        {
-          currentStore.host !== undefined ? <CurrentLInfoPage/> : ''
-        }
+        {currentStore.host !== undefined ? <CurrentLInfoPage /> : ''}
       </Box>
       <Box className={classes.bottomWrapper}>
         <Tabs
@@ -176,7 +174,7 @@ export default function MainPage() {
         <TabPanel value={value} index={0}>
           <Button
             className={classes.seeMore}
-            startIcon={<FullscreenIcon/>}
+            startIcon={<FullscreenIcon />}
             onClick={handleClickOpen}
           >
             Full Screen
@@ -187,15 +185,15 @@ export default function MainPage() {
             onClose={handleClose}
             TransitionComponent={Transition}
           >
-            <DialogHeader onClose={handleClose}/>
-            <MembershipListPage/>
+            <DialogHeader onClose={handleClose} />
+            <MembershipListPage />
           </Dialog>
-          <MembershipListPage/>
+          <MembershipListPage />
         </TabPanel>
         <TabPanel value={value} index={1}>
           <Button
             className={classes.seeMore}
-            startIcon={<FullscreenIcon/>}
+            startIcon={<FullscreenIcon />}
             onClick={handleClickOpen}
           >
             Full Screen
@@ -206,10 +204,10 @@ export default function MainPage() {
             onClose={handleClose}
             TransitionComponent={Transition}
           >
-            <DialogHeader onClose={handleClose}/>
-            <HistoryListPage/>
+            <DialogHeader onClose={handleClose} />
+            <HistoryListPage />
           </Dialog>
-          <HistoryListPage/>
+          <HistoryListPage />
         </TabPanel>
       </Box>
     </PrivatePage>
